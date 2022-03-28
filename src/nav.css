@@ -1,0 +1,60 @@
+:root {
+	--fontColor: rgb(34, 34, 34);
+	--borderColor: rgb(34, 34, 34);
+	--hoverNavBtnColor: rgb(206, 206, 206);
+	--greenColor: #439a86;
+	--fLato: 'Lato', sans-serif;
+	--mMargin: 10px;
+	--border: 2px solid var(--borderColor);
+}
+
+/* TOP NAV */
+.nav-top-bar {
+	display: flex;
+	align-items: center;
+	padding: var(--mMargin);
+}
+
+.nav-top-bar h1,
+.nav-top-bar ion-icon {
+	font-size: 30px;
+}
+.nav-top-bar ion-icon {
+	margin-right: var(--mMargin);
+}
+.nav-top-bar {
+	border-bottom: var(--border);
+}
+
+/* LEFT NAV */
+.nav-left-bar {
+	width: 200px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding-left: var(--mMargin);
+	border-right: var(--border);
+}
+.nav-left-bar h2 {
+	margin: var(--mMargin) 0;
+}
+/* nav btns */
+.nav-left-button {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	cursor: pointer;
+}
+.nav-left-button:hover {
+	background-color: var(--hoverNavBtnColor);
+}
+.nav-left-button ion-icon {
+	margin-right: var(--mMargin);
+}
+/* add board btn */
+.nav-add-board-button ion-icon,
+.nav-add-board-button h3 {
+	color: var(--greenColor);
+}

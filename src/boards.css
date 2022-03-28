@@ -1,0 +1,32 @@
+:root {
+	--fontColor: rgb(34, 34, 34);
+	--borderColor: rgb(34, 34, 34);
+	--hoverNavBtnColor: rgb(206, 206, 206);
+	--modalContainerBackgroundColor: rgba(206, 206, 206, 0.781);
+	--modalSubcontainerBackgroundColor: rgb(255, 255, 255);
+	--greenColor: #439a86;
+	--fLato: 'Lato', sans-serif;
+	--mMargin: 10px;
+	--border: 2px solid var(--borderColor);
+}
+
+.board-add-board-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--modalContainerBackgroundColor);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.board-add-board-modal div {
+	background-color: var(--modalSubcontainerBackgroundColor);
+	padding: var(--mMargin);
+}
+.board-add-board-modal div div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
