@@ -1,0 +1,66 @@
+.modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--modalContainerBackgroundColor);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+.modal-container-sub {
+	background-color: var(--modalSubcontainerBackgroundColor);
+
+	border: var(--border);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.modal-container-title-div,
+.modal-content-container,
+.modal-btn {
+	margin: var(--mMargin);
+}
+.modal-container-title-div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--mMargin);
+	padding-bottom: 7px;
+	width: 100%;
+	border-bottom: var(--borderLight);
+}
+.modal-container-title-div h3 {
+	margin-left: var(--mMargin);
+}
+
+.modal-icon-close {
+	font-size: 25px;
+	margin-right: var(--mMargin);
+	cursor: pointer;
+}
+
+.modal-content-container {
+	margin: var(--mMargin);
+}
+.modal-btn {
+	margin-top: var(--mMargin);
+	padding: var(--buttonPadding);
+	background-color: var(--greenColor);
+	border: var(--border);
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.hide {
+	display: none;
+}
+
+.required-field-warning {
+	color: red;
+	font-size: 12px;
+	font-style: italic;
+}

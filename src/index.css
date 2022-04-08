@@ -1,7 +1,15 @@
 :root {
 	--fontColor: rgb(34, 34, 34);
+	--borderColor: rgb(34, 34, 34);
+	--hoverNavBtnColor: rgb(206, 206, 206);
+	--modalContainerBackgroundColor: rgba(206, 206, 206, 0.781);
+	--modalSubcontainerBackgroundColor: rgb(255, 255, 255);
+	--greenColor: #439a86;
 	--fLato: 'Lato', sans-serif;
 	--mMargin: 10px;
+	--border: 2px solid var(--borderColor);
+	--borderLight: 2px solid rgb(206, 206, 206);
+	--buttonPadding: 5px 10px;
 }
 * {
 	margin: 0;
@@ -28,8 +36,13 @@ body,
 }
 .middle-div {
 	height: 100%;
+	display: flex;
 }
-/* Margins and Colors */
-.nav-top-bar {
-	padding: var(--mMargin);
+.the-body {
+	margin: var(--mMargin);
+	width: 100%;
+}
+/* GENERAL */
+.hide {
+	display: none;
 }

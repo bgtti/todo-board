@@ -1,0 +1,55 @@
+/* @value --mMargin from "../index.css"; */
+.board-content-section-header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 25px;
+}
+
+.board-content-main-btns-container {
+	display: flex;
+	gap: var(--mMargin);
+}
+.board-content-option-buttons {
+	/* margin: var(--mMargin);
+	margin-top: var(--mMargin); */
+	padding: var(--buttonPadding);
+	background-color: var(--greenColor);
+	border: var(--border);
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+/* TO DO CARD */
+.to-do-card {
+	width: 200px;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 5px;
+	border: var(--border);
+	border-radius: 5px;
+}
+.to-do-title-div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.to-do-title-div h4 {
+	font-size: 18px;
+}
+.to-do-due {
+	font-size: 12px;
+}
+.to-do-description {
+	font-size: 15px;
+}
+.to-do-icons-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
