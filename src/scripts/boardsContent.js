@@ -74,7 +74,9 @@ const BoardContentDisplay = (function () {
 
     return {
         topSection,
-        mainSection
+        mainSection,
+
+        addToDoBtn //used in event listener index.js
     }
 })()
 
