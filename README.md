@@ -15,6 +15,10 @@ Currently implemented:
 Board creation done. Currently only 'All boards' page displaying.
 Changing board view not possible due to event listener error that needs fixing.
 
+Event listener issue (in index.js under "//E.L. for nav board buttons: displaying the different boards")
+
+![Preview of eventlistener issue](/src/assets/eventlistenerIssue.png)
+
 The code is organized in the following way:
 index.js: displays the elements in the html file. Most elements are imported from other files (navbar, footer, modals, etc).
 index.css styles general content only. Each module contains their own css files.
