@@ -5,6 +5,10 @@
 	--modalContainerBackgroundColor: rgba(206, 206, 206, 0.781);
 	--modalSubcontainerBackgroundColor: rgb(255, 255, 255);
 	--greenColor: #439a86;
+	--colorOrange: #ff6600; 
+	--colorBlue: #427bcc;
+	--colorRed: #df3f31;
+	--colorYellow: #f1a423;
 	--fLato: 'Lato', sans-serif;
 	--mMargin: 10px;
 	--border: 2px solid var(--borderColor);
