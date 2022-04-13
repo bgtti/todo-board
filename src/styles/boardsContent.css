@@ -24,6 +24,17 @@
 }
 
 /* TO DO CARD */
+.todo-cards-container{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+	grid-auto-rows: 215px;
+	gap: 15px;
+}
+/* .todo-cards-container > * {
+
+} */
+
+
 .to-do-card {
 	width: 200px;
 	height: 200px;
@@ -33,6 +44,7 @@
 	padding: 5px;
 	border: var(--border);
 	border-radius: 5px;
+	justify-self: center;
 }
 .to-do-title-div {
 	display: flex;

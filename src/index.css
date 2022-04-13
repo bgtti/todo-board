@@ -46,6 +46,8 @@ body,
 	margin: var(--mMargin);
 	width: 100%;
 }
+
+
 /* GENERAL */
 .hide {
 	display: none;

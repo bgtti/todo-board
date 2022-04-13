@@ -46,6 +46,7 @@ const TodoDisplay = (function () {
         };
 
         let toDoCardsDiv = document.createElement('div');
+        toDoCardsDiv.classList.add('todo-cards-container');
 
         for (let todo of theTodosToDisplay) {
             ToDoCard.createCard(todo["toDoId"], todo["title"], todo["description"], toDoCardsDiv);
