@@ -9,6 +9,7 @@
 	--colorBlue: #427bcc;
 	--colorRed: #df3f31;
 	--colorYellow: #f1a423;
+	--colorLightGrey: rgb(214, 214, 214);;
 	--fLato: 'Lato', sans-serif;
 	--mMargin: 10px;
 	--border: 2px solid var(--borderColor);
@@ -54,4 +55,16 @@ body,
 }
 .hide > * {
 	display: none;
+}
+
+.priority-level-0 {
+	color: var(--colorLightGrey);
+}
+
+.priority-level-1 {
+	color: var(--colorYellow);
+}
+
+.priority-level-2 {
+	color: var(--colorRed);
 }

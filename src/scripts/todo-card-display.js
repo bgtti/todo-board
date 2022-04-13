@@ -1,6 +1,7 @@
 //In this file: Todo card HTML Elements
+
 export let ToDoCard = (function () {
-    let createCard = function (tdId, tdTitle, tdDescription, targetDiv) {
+    let createCard = function (tdId, tdTitle, tdDescription, tdPriority, targetDiv) {
         let cardDisplay = document.createElement('div');
         cardDisplay.setAttribute('data-todo', `${tdId}`);//value needed
         cardDisplay.classList.add('to-do-card');
@@ -11,6 +12,7 @@ export let ToDoCard = (function () {
         cardTitle.textContent = tdTitle; //value needed
         let priorityLevel = document.createElement('ion-icon');
         priorityLevel.setAttribute('name', 'flag');
+        priorityLevel.classList.add(`priority-level-${tdPriority}`);
         cardTitleContainer.append(cardTitle, priorityLevel);
 
         let dueDate = document.createElement('p');

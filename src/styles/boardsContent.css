@@ -15,13 +15,17 @@
 	/* margin: var(--mMargin);
 	margin-top: var(--mMargin); */
 	padding: var(--buttonPadding);
-	background-color: var(--greenColor);
+	background-color: var(--colorBlue);
 	border: var(--border);
 	border-radius: 5px;
 	font-weight: bold;
 	font-size: 13px;
 	cursor: pointer;
 }
+.board-content-option-buttons-edit, .board-content-option-buttons-delete{
+	background-color: var(--colorLightGrey);
+}
+
 
 /* TO DO CARD */
 .todo-cards-container{

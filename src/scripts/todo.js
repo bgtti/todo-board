@@ -49,7 +49,7 @@ const TodoDisplay = (function () {
         toDoCardsDiv.classList.add('todo-cards-container');
 
         for (let todo of theTodosToDisplay) {
-            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["description"], toDoCardsDiv);
+            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["description"], todo["priority"], toDoCardsDiv);
         }
         BoardPage.mainSection.append(toDoCardsDiv);
     }

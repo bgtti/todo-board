@@ -50,7 +50,7 @@
 .modal-btn {
 	margin-top: var(--mMargin);
 	padding: var(--buttonPadding);
-	background-color: var(--greenColor);
+	background-color: var(--colorBlue);
 	border: var(--border);
 	border-radius: 5px;
 	font-weight: bold;
@@ -122,15 +122,7 @@
 .priority-flag-button:hover {
 	background-color: rgb(97, 97, 97);
 }
-.priority-level-0 {
-	color: rgb(194, 194, 194);
-}
-.priority-level-1 {
-	color: rgb(214, 193, 0);
-}
-.priority-level-2 {
-	color: rgb(248, 0, 0);
-}
+
 .todo-modal-add-todo-check-container {
 	align-self: flex-start;
 	margin-left: var(--mMargin);

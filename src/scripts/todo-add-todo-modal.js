@@ -201,36 +201,36 @@ let ToDoAddModal = (function () {
     checklistUl.classList.add('todo-modal-add-todo-ul-container');
 
 
-    // let EXAMPLE1 = document.createElement('li'); //ERASE
-    // EXAMPLE1.classList.add('todo-modal-add-todo-item')
-    // EXAMPLE1.classList.add('todo-modal-add-todo-checked-item')
-    // let EXAMPLE1DIV = document.createElement('div');
-    // let EXAMPLE1CHECK = document.createElement('ion-icon');//ERASE
-    // EXAMPLE1CHECK.classList.add('todo-modal-add-todo-check-icon')
-    // EXAMPLE1CHECK.setAttribute('name', 'checkmark'); //ERASE
-    // let EXAMPLE1LI = document.createElement('p');//ERASE
-    // EXAMPLE1LI.textContent = "this is something"
-    // let EXAMPLE1TRASH = document.createElement('ion-icon');//ERASE
-    // EXAMPLE1TRASH.setAttribute('name', 'trash'); //ERASE 
-    // EXAMPLE1TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    // EXAMPLE1DIV.append(EXAMPLE1CHECK, EXAMPLE1LI, EXAMPLE1TRASH); //ERASE 
-    // EXAMPLE1.append(EXAMPLE1DIV); //ERASE 
+    let EXAMPLE1 = document.createElement('li'); //ERASE
+    EXAMPLE1.classList.add('todo-modal-add-todo-item')
+    EXAMPLE1.classList.add('todo-modal-add-todo-checked-item')
+    let EXAMPLE1DIV = document.createElement('div');
+    let EXAMPLE1CHECK = document.createElement('ion-icon');//ERASE
+    EXAMPLE1CHECK.classList.add('todo-modal-add-todo-check-icon')
+    EXAMPLE1CHECK.setAttribute('name', 'checkmark'); //ERASE
+    let EXAMPLE1LI = document.createElement('p');//ERASE
+    EXAMPLE1LI.textContent = "this is something"
+    let EXAMPLE1TRASH = document.createElement('ion-icon');//ERASE
+    EXAMPLE1TRASH.setAttribute('name', 'trash'); //ERASE 
+    EXAMPLE1TRASH.classList.add('todo-modal-add-todo-trash-icon')
+    EXAMPLE1DIV.append(EXAMPLE1CHECK, EXAMPLE1LI, EXAMPLE1TRASH); //ERASE 
+    EXAMPLE1.append(EXAMPLE1DIV); //ERASE 
 
-    // let EXAMPLE2 = document.createElement('li'); //ERASE
-    // EXAMPLE2.classList.add('todo-modal-add-todo-item')
-    // let EXAMPLE2DIV = document.createElement('div');
-    // let EXAMPLE2CHECK = document.createElement('ion-icon');//ERASE
-    // EXAMPLE2CHECK.setAttribute('name', 'checkmark'); //ERASE
-    // EXAMPLE2CHECK.classList.add('todo-modal-add-todo-check-icon')
-    // let EXAMPLE2LI = document.createElement('p');//ERASE
-    // EXAMPLE2LI.textContent = "this is something"
-    // let EXAMPLE2TRASH = document.createElement('ion-icon');//ERASE
-    // EXAMPLE2TRASH.setAttribute('name', 'trash'); //ERASE 
-    // EXAMPLE2TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    // EXAMPLE2DIV.append(EXAMPLE2CHECK, EXAMPLE2LI, EXAMPLE2TRASH); //ERASE 
-    // EXAMPLE2.append(EXAMPLE2DIV); //ERASE 
+    let EXAMPLE2 = document.createElement('li'); //ERASE
+    EXAMPLE2.classList.add('todo-modal-add-todo-item')
+    let EXAMPLE2DIV = document.createElement('div');
+    let EXAMPLE2CHECK = document.createElement('ion-icon');//ERASE
+    EXAMPLE2CHECK.setAttribute('name', 'checkmark'); //ERASE
+    EXAMPLE2CHECK.classList.add('todo-modal-add-todo-check-icon')
+    let EXAMPLE2LI = document.createElement('p');//ERASE
+    EXAMPLE2LI.textContent = "this is something"
+    let EXAMPLE2TRASH = document.createElement('ion-icon');//ERASE
+    EXAMPLE2TRASH.setAttribute('name', 'trash'); //ERASE 
+    EXAMPLE2TRASH.classList.add('todo-modal-add-todo-trash-icon')
+    EXAMPLE2DIV.append(EXAMPLE2CHECK, EXAMPLE2LI, EXAMPLE2TRASH); //ERASE 
+    EXAMPLE2.append(EXAMPLE2DIV); //ERASE 
 
-    // checklistUl.append(EXAMPLE1, EXAMPLE2);
+    checklistUl.append(EXAMPLE1, EXAMPLE2);
 
     toDoChecklistContainer.append(addToChecklistContainer, checklistUl);
 

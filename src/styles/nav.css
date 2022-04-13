@@ -32,7 +32,7 @@
 	position:absolute;
 }
 .nav-icon-board{
-	color: rgb(214, 214, 214);
+	color: var(--colorLightGrey);
 	font-size: 30px;
 	
 }
@@ -95,7 +95,7 @@
 /* add board btn */
 .nav-add-board-button ion-icon,
 .nav-add-board-button h3 {
-	color: var(--greenColor);
+	color: var(--colorBlue);
 }
 
 /* MOBILE NAV */

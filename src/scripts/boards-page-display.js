@@ -15,12 +15,19 @@ const BoardPage = (function () {
     const addToDoBtn = document.createElement('div');
     addToDoBtn.textContent = "Add to do";
     addToDoBtn.classList.add("board-content-option-buttons");
+    addToDoBtn.classList.add("board-content-option-buttons-add");
 
-    const settingsBtn = document.createElement('div');
-    settingsBtn.textContent = "Board settings";
-    settingsBtn.classList.add("board-content-option-buttons");
+    const editBoardBtn = document.createElement('div');
+    editBoardBtn.textContent = "Edit board";
+    editBoardBtn.classList.add("board-content-option-buttons");
+    editBoardBtn.classList.add("board-content-option-buttons-edit");
 
-    mainBtnsContainer.append(addToDoBtn, settingsBtn);
+    const deleteBoardBtn = document.createElement('div');
+    deleteBoardBtn.textContent = "Delete board";
+    deleteBoardBtn.classList.add("board-content-option-buttons");
+    deleteBoardBtn.classList.add("board-content-option-buttons-delete");
+
+    mainBtnsContainer.append(addToDoBtn, editBoardBtn, deleteBoardBtn);
 
     topSection.append(boardName, mainBtnsContainer);
 
