@@ -127,5 +127,6 @@ export {
     BoardFunctionsModal, //used in index.js event listener
 
     BoardDisplay, //used in index.js to display board list in nav
+    allBoardsArray, //used in todo.js to access board options for adding a todo in modal.
 
 }

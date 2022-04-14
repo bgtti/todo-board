@@ -50,6 +50,22 @@ let ToDoAddModal = (function () {
     requiredFieldWarning.classList.add('todo-modal-add-todo-required-field-warning');
     requiredFieldWarning.classList.add('hide'); //DONT FORGET TO UNHIDE
 
+    //board selection
+    let boardSelectionContainer = document.createElement('div');
+    boardSelectionContainer.classList.add('modal-label-and-field-horizontal');
+
+    let labelForBoard = document.createElement('label');
+    labelForBoard.setAttribute('for', 'boardSelection');
+    labelForBoard.textContent = "Board: ";
+    labelForBoard.classList.add('modal-label-and-field-horizontal-label');
+
+    let boardSelectTag = document.createElement('select');
+    boardSelectTag.setAttribute('id', 'boardSelection');
+    boardSelectTag.setAttribute('name', 'boardSelection');
+    boardSelectTag.classList.add('modal-label-and-field-horizontal-input');
+
+    boardSelectionContainer.append(labelForBoard, boardSelectTag);
+
     //priority level
     let prioritySettingContainer = document.createElement('div');
     prioritySettingContainer.classList.add('modal-label-and-field-horizontal');
@@ -62,10 +78,9 @@ let ToDoAddModal = (function () {
     let priorityLevelIconsContainer = document.createElement('div');
     priorityLevelIconsContainer.classList.add('todo-modal-add-todo-priority-icons-container')
     priorityLevelIconsContainer.classList.add('modal-label-and-field-horizontal-input');
-    priorityLevelIconsContainer.setAttribute('data-plevel', '0')
 
     let priorityLevel0Container = document.createElement('div');
-    priorityLevel0Container.setAttribute('data-plevel', '0');
+    priorityLevel0Container.dataset.setPriority = "0";
     priorityLevel0Container.classList.add('priority-flag-button');
     priorityLevel0Container.classList.add('selected-priority-level');
     let priorityLevel0 = document.createElement('ion-icon');
@@ -74,7 +89,7 @@ let ToDoAddModal = (function () {
     priorityLevel0Container.append(priorityLevel0);
 
     let priorityLevel1Container = document.createElement('div');
-    priorityLevel1Container.setAttribute('data-plevel', '1');
+    priorityLevel1Container.dataset.setPriority = "1";
     priorityLevel1Container.classList.add('priority-flag-button');
     let priorityLevel1 = document.createElement('ion-icon');
     priorityLevel1.setAttribute('name', 'flag');
@@ -82,14 +97,22 @@ let ToDoAddModal = (function () {
     priorityLevel1Container.append(priorityLevel1);
 
     let priorityLevel2Container = document.createElement('div');
-    priorityLevel2Container.setAttribute('data-plevel', '2');
+    priorityLevel2Container.dataset.setPriority = "2";
     priorityLevel2Container.classList.add('priority-flag-button');
     let priorityLevel2 = document.createElement('ion-icon');
     priorityLevel2.setAttribute('name', 'flag');
     priorityLevel2.classList.add('priority-level-2');
     priorityLevel2Container.append(priorityLevel2);
 
-    priorityLevelIconsContainer.append(priorityLevel0Container, priorityLevel1Container, priorityLevel2Container);
+    let priorityLevel3Container = document.createElement('div');
+    priorityLevel3Container.dataset.setPriority = "3";
+    priorityLevel3Container.classList.add('priority-flag-button');
+    let priorityLevel3 = document.createElement('ion-icon');
+    priorityLevel3.setAttribute('name', 'checkmark-done');
+    priorityLevel3.classList.add('priority-level-3');
+    priorityLevel3Container.append(priorityLevel3);
+
+    priorityLevelIconsContainer.append(priorityLevel0Container, priorityLevel1Container, priorityLevel2Container, priorityLevel3Container);
 
     prioritySettingContainer.append(labelForPriority, priorityLevelIconsContainer);
 
@@ -186,12 +209,12 @@ let ToDoAddModal = (function () {
 
     let addToChecklist = document.createElement('input');
     addToChecklist.setAttribute('type', 'text');
-    addToChecklist.setAttribute('maxlength', '20');
+    addToChecklist.setAttribute('maxlength', '30');
     addToChecklist.setAttribute('id', 'checklist');
     addToChecklist.setAttribute('placeholder', 'List item...');
     addToChecklist.classList.add('todo-modal-add-todo-add-checklist-input');
 
-    let addToChecklistBtn = document.createElement('div');
+    let addToChecklistBtn = document.createElement('button');
     addToChecklistBtn.textContent = "Add";
     addToChecklistBtn.classList.add('todo-modal-add-todo-add-checklist-btn');
 
@@ -201,36 +224,36 @@ let ToDoAddModal = (function () {
     checklistUl.classList.add('todo-modal-add-todo-ul-container');
 
 
-    let EXAMPLE1 = document.createElement('li'); //ERASE
-    EXAMPLE1.classList.add('todo-modal-add-todo-item')
-    EXAMPLE1.classList.add('todo-modal-add-todo-checked-item')
-    let EXAMPLE1DIV = document.createElement('div');
-    let EXAMPLE1CHECK = document.createElement('ion-icon');//ERASE
-    EXAMPLE1CHECK.classList.add('todo-modal-add-todo-check-icon')
-    EXAMPLE1CHECK.setAttribute('name', 'checkmark'); //ERASE
-    let EXAMPLE1LI = document.createElement('p');//ERASE
-    EXAMPLE1LI.textContent = "this is something"
-    let EXAMPLE1TRASH = document.createElement('ion-icon');//ERASE
-    EXAMPLE1TRASH.setAttribute('name', 'trash'); //ERASE 
-    EXAMPLE1TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    EXAMPLE1DIV.append(EXAMPLE1CHECK, EXAMPLE1LI, EXAMPLE1TRASH); //ERASE 
-    EXAMPLE1.append(EXAMPLE1DIV); //ERASE 
+    // let EXAMPLE1 = document.createElement('li'); //ERASE
+    // EXAMPLE1.classList.add('todo-modal-add-todo-item')
+    // EXAMPLE1.classList.add('todo-modal-add-todo-checked-item')
+    // let EXAMPLE1DIV = document.createElement('div');
+    // let EXAMPLE1CHECK = document.createElement('ion-icon');//ERASE
+    // EXAMPLE1CHECK.classList.add('todo-modal-add-todo-check-icon')
+    // EXAMPLE1CHECK.setAttribute('name', 'checkmark'); //ERASE
+    // let EXAMPLE1LI = document.createElement('p');//ERASE
+    // EXAMPLE1LI.textContent = "this is something"
+    // let EXAMPLE1TRASH = document.createElement('ion-icon');//ERASE
+    // EXAMPLE1TRASH.setAttribute('name', 'trash'); //ERASE 
+    // EXAMPLE1TRASH.classList.add('todo-modal-add-todo-trash-icon')
+    // EXAMPLE1DIV.append(EXAMPLE1CHECK, EXAMPLE1LI, EXAMPLE1TRASH); //ERASE 
+    // EXAMPLE1.append(EXAMPLE1DIV); //ERASE 
 
-    let EXAMPLE2 = document.createElement('li'); //ERASE
-    EXAMPLE2.classList.add('todo-modal-add-todo-item')
-    let EXAMPLE2DIV = document.createElement('div');
-    let EXAMPLE2CHECK = document.createElement('ion-icon');//ERASE
-    EXAMPLE2CHECK.setAttribute('name', 'checkmark'); //ERASE
-    EXAMPLE2CHECK.classList.add('todo-modal-add-todo-check-icon')
-    let EXAMPLE2LI = document.createElement('p');//ERASE
-    EXAMPLE2LI.textContent = "this is something"
-    let EXAMPLE2TRASH = document.createElement('ion-icon');//ERASE
-    EXAMPLE2TRASH.setAttribute('name', 'trash'); //ERASE 
-    EXAMPLE2TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    EXAMPLE2DIV.append(EXAMPLE2CHECK, EXAMPLE2LI, EXAMPLE2TRASH); //ERASE 
-    EXAMPLE2.append(EXAMPLE2DIV); //ERASE 
+    // let EXAMPLE2 = document.createElement('li'); //ERASE
+    // EXAMPLE2.classList.add('todo-modal-add-todo-item')
+    // let EXAMPLE2DIV = document.createElement('div');
+    // let EXAMPLE2CHECK = document.createElement('ion-icon');//ERASE
+    // EXAMPLE2CHECK.setAttribute('name', 'checkmark'); //ERASE
+    // EXAMPLE2CHECK.classList.add('todo-modal-add-todo-check-icon')
+    // let EXAMPLE2LI = document.createElement('p');//ERASE
+    // EXAMPLE2LI.textContent = "this is something"
+    // let EXAMPLE2TRASH = document.createElement('ion-icon');//ERASE
+    // EXAMPLE2TRASH.setAttribute('name', 'trash'); //ERASE 
+    // EXAMPLE2TRASH.classList.add('todo-modal-add-todo-trash-icon')
+    // EXAMPLE2DIV.append(EXAMPLE2CHECK, EXAMPLE2LI, EXAMPLE2TRASH); //ERASE 
+    // EXAMPLE2.append(EXAMPLE2DIV); //ERASE 
 
-    checklistUl.append(EXAMPLE1, EXAMPLE2);
+    // checklistUl.append(EXAMPLE1, EXAMPLE2);
 
     toDoChecklistContainer.append(addToChecklistContainer, checklistUl);
 
@@ -241,7 +264,7 @@ let ToDoAddModal = (function () {
     saveToDoButton.innerText = "Save to-do";
 
     //adding elements to subcontainer
-    subContainerModal.append(modalTitleContainer, toDoTitleContainer, requiredFieldWarning, prioritySettingContainer, dueDateContainer, toDoDescriptionContainer, enableNotesContainer, toDoNotesContainer, enableChecklistContainer, toDoChecklistContainer, saveToDoButton)
+    subContainerModal.append(modalTitleContainer, toDoTitleContainer, requiredFieldWarning, boardSelectionContainer, prioritySettingContainer, dueDateContainer, toDoDescriptionContainer, enableNotesContainer, toDoNotesContainer, enableChecklistContainer, toDoChecklistContainer, saveToDoButton)
 
     // adding subcontainer to container
     addToDoModal.append(subContainerModal);
@@ -253,18 +276,55 @@ let ToDoAddModal = (function () {
         dueDateSelection, // used in todo.js to create to-do
         toDoDescription, // used in todo.js to create to-do
         closeModalIcon, // used in index.js to close modal
-        notesEnabledCheckBox, //used in index.js to open notes
+        notesEnabledCheckBox, //used in index.js to open notes / used in todo.js to reset modal
         toDoNotesContainer,//used in index.js to open notes
         checklistEnabledCheckBox, //used in index.js to open checklist
-        toDoChecklistContainer,//used in index.js to open checklist
-        priorityLevel0Container, //used in index.js to read priority value
-        priorityLevel1Container, //used in index.js to read priority value
-        priorityLevel2Container, //used in index.js to read priority value
-        priorityLevelIconsContainer,//used in index.js to read priority value
+        toDoChecklistContainer,//used in index.js to open checklist / used in todo.js to reset modal
+        priorityLevel0Container, //used in todo.js to reset modal
+        // priorityLevel1Container, //used in index.js to read priority value
+        // priorityLevel2Container, //used in index.js to read priority value
+        priorityLevelIconsContainer,//used in index.js to read priority value / used in todo.js to read priority value
+        addToChecklistBtn, //used in index.js to add checklist items
+        saveToDoButton,//used in index.js to save todo
+        toDoNotes, //used in index.js to save todo
+
+        boardSelectTag, //used in todo.js to append board selection options
+        addToChecklist, // used in todo.js to add checklist items to array;
+        checklistUl, // used in todo.js to add checklist items to array / used in function bellow to append li;
 
     }
 })()
 
+let ToDoAddModalFunction = (function () {
+    const addListItem = function (index, item, status) {
+        let listItem = document.createElement('li');
+        listItem.classList.add('todo-modal-add-todo-item')
+        if (status === false) listItem.classList.add('todo-modal-add-todo-checked-item')
+        let listItemDiv = document.createElement('div');
+        let listItemCheck = document.createElement('ion-icon');
+        listItemCheck.dataset.itemIndexCheck = index;
+        status === true ? listItemCheck.setAttribute('name', 'square-outline') : listItemCheck.setAttribute('name', 'checkmark');
+        listItemCheck.classList.add('todo-modal-add-todo-check-icon');
+        // listItemCheck.setAttribute('name', 'checkmark');
+        let listItemP = document.createElement('p');
+        listItemP.dataset.itemIndexCheck = index;
+        listItemP.textContent = item;
+        let listItemTrash = document.createElement('ion-icon');
+        listItemTrash.setAttribute('name', 'trash');
+        listItemTrash.dataset.itemIndexDelete = index;
+        listItemTrash.classList.add('todo-modal-add-todo-trash-icon')
+        listItemDiv.append(listItemCheck, listItemP, listItemTrash);
+        listItem.append(listItemDiv);
+
+        ToDoAddModal.checklistUl.append(listItem);
+    }
+    return {
+        addListItem
+    }
+})();
+
+
 export {
-    ToDoAddModal //used in index.js and todo.js
+    ToDoAddModal, //used in index.js and todo.js
+    ToDoAddModalFunction //used in index.js and todo.js to create list items
 }

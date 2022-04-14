@@ -63,6 +63,20 @@ ToDoAddModal.closeModalIcon.addEventListener('click', TodoFunctionsModal.closeAd
 ToDoAddModal.notesEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableNoteField, false);
 ToDoAddModal.checklistEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableChecklistField, false);
 
+//E.L. for todo module: add and remove items to/from checklist, check items in list
+ToDoAddModal.addToChecklistBtn.addEventListener("click", TodoFunctionsModal.addChecklistItem, false);
+ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.deleteChecklistItem, false);
+ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.checkChecklistItem, false);
+
+//E.L. for todo module: set priority
+ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
+
+//E.L. for todo module: save todo
+ToDoAddModal.saveToDoButton.addEventListener('click', () => {
+    TodoFunctionsModal.creatingNewToDoObject();
+    BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
+}, false);
+
 TodoDisplay.displayTodosInBoard();
 
 

@@ -68,3 +68,6 @@ body,
 .priority-level-2 {
 	color: var(--colorRed);
 }
+.priority-level-3 {
+	color: var(--colorBlue);
+}

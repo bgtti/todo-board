@@ -11,7 +11,8 @@ export let ToDoCard = (function () {
         let cardTitle = document.createElement('h4');
         cardTitle.textContent = tdTitle; //value needed
         let priorityLevel = document.createElement('ion-icon');
-        priorityLevel.setAttribute('name', 'flag');
+        tdPriority === "3" ? priorityLevel.setAttribute('name', 'checkmark-done') : priorityLevel.setAttribute('name', 'flag');
+        // priorityLevel.setAttribute('name', 'flag');
         priorityLevel.classList.add(`priority-level-${tdPriority}`);
         cardTitleContainer.append(cardTitle, priorityLevel);
 
