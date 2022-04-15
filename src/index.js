@@ -1,16 +1,17 @@
+//*************** IMPORTS ***************
 import "./index.css";
-import { NavTop } from "./scripts/nav-top.js";
-import { NavLeft } from "./scripts/nav-left.js";
-import { NavMobile } from "./scripts/nav-mobile.js";
-import { PageContent } from "./scripts/body.js"
+import { NavTop } from "./module-01-nav/nav-top";
+import { NavLeft } from "./module-01-nav/nav-left";
+import { NavMobile } from "./module-01-nav/nav-mobile";
+import { PageContent } from "./module-02-body/body.js"
 import { BoardAddBoardModal } from "./scripts/boards-add-board-modal.js";
-import { BoardDisplay, BoardFunctionsModal, } from "./scripts/boards.js";
-import { BoardPage } from "./scripts/boards-page-display.js";
-import { BoardEditBoardModal } from "./scripts/boards-edit-board-modal.js";
+import { BoardDisplay, BoardFunctionsModal, } from "./module-04-boards/boards.js";
+import { BoardPage } from "./module-04-boards/boards-page-display.js";
+import { BoardEditBoardModal } from "./module-04-boards/boards-edit-board-modal.js";
 import { BoardDeleteBoardModal } from './scripts/boards-delete-board-modal.js';
-import { TodoFunctionsModal, TodoDisplay } from "./scripts/todo.js";
-import { ToDoAddModal } from "./scripts/todo-add-todo-modal.js";
-import { Footer } from "./scripts/footer.js";
+import { TodoFunctionsModal, TodoDisplay } from "./module-05-todos/todo.js";
+import { ToDoAddModal } from "./module-05-todos/todo-add-todo-modal.js";
+import { Footer } from "./module-03-footer/footer.js";
 
 
 //***THE PAGE STRUCTURE

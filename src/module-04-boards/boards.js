@@ -3,9 +3,9 @@ import { BoardAddBoardModal } from "./boards-add-board-modal.js"//needed here fo
 import { BoardEditBoardModal } from "./boards-edit-board-modal.js"; //needed here for html elements targeting.
 import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed here for html elements targeting.
 import { NavLeft } from "./nav-left.js"//needed here for html elements targeting.
-import { PageContent } from "./body.js" //board page content appended to the body
+import { PageContent } from "../module-02-body/body.js" //board page content appended to the body
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
-import { TodoDisplay } from "./todo.js" //import function to display todos on board
+import { TodoDisplay } from "../module-05-todos/todo.js" //import function to display todos on board
 
 let allBoardsArray = []; //the allBoardsArray stores all active boards. 
 let arrayCounter = 0; //the arrayCounter is used to give boards a unique id

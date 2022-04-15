@@ -1,7 +1,7 @@
 import { ToDoAddModal, ToDoAddModalFunction } from "./todo-add-todo-modal.js"; //input field and save button from this file used here.
 import { ToDoCard } from "./todo-card-display.js"; //displays cards on board
-import { BoardPage } from "./boards-page-display.js" //appends todo cards to board
-import { allBoardsArray } from "./boards.js" //reads existing boards
+import { BoardPage } from "../module-04-boards/boards-page-display.js" //appends todo cards to board
+import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
 
 let allTodosArray = [];
 let todoCounter = 0;
