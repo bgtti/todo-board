@@ -77,7 +77,7 @@ const TodoDisplay = (function () {
 //Module with functions that manages new todo modal
 const TodoFunctionsModal = (function () {
     //showing board options in add todo modal
-    const showBoards = function () {
+    const showBoards = function (theboard) {
         while (ToDoAddModal.boardSelectTag.firstChild) {
             ToDoAddModal.boardSelectTag.removeChild(ToDoAddModal.boardSelectTag.firstChild);
         }
@@ -90,7 +90,11 @@ const TodoFunctionsModal = (function () {
             choice.setAttribute('data-bChoice', bChoice["boardId"]);
             choice.textContent = bChoice["boardName"];
             ToDoAddModal.boardSelectTag.append(choice);
+            if (theboard === choice.getAttribute('data-bChoice')) {
+                choice.selected = true;
+            }
         }
+
     }
 
     //enabling/disabling note and checklist fields
@@ -184,9 +188,13 @@ const TodoFunctionsModal = (function () {
         ToDoAddModal.checklistEnabledCheckBox.checked = false;
         ToDoAddModal.toDoChecklistContainer.classList.add('hide');
     }
+
+
     //opening and closing todo modal
-    const openAddNewTodoModal = function () {
-        showBoards();
+    const openAddNewTodoModal = function (theboard) {
+        let todoBoardPreSelection = theboard.target.dataset.todoBoard;
+
+        showBoards(todoBoardPreSelection);
         ToDoAddModal.addToDoModal.classList.remove('hide');
     }
     const closeAddNewTodoModal = function () {
@@ -198,14 +206,14 @@ const TodoFunctionsModal = (function () {
     const creatingNewToDoObject = function () {
         new ToDoList(
             ToDoAddModal.inputFieldName.value,
-            ToDoAddModal.boardSelectTag.value,
+            ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice,
             priorityLevelChosen,
             ToDoAddModal.dueDateSelection.value,
             ToDoAddModal.toDoDescription.value,
             ToDoAddModal.toDoNotes.value,
             checkListItemsArray
         )
-        console.log(allTodosArray)
+        console.log(allTodosArray) /////DELETE
         closeAddNewTodoModal();
     }
     // title, boardId, priority, dueDate, description, note, checklist

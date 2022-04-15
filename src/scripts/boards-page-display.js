@@ -39,7 +39,10 @@ const BoardPage = (function () {
         mainSection, //used in function in boards.js
         boardName, //used in function in boards.js
 
-        addToDoBtn //used in event listener index.js ///check
+        addToDoBtn, //used in event listener index.js ///check /used in boards.js to add dataset
+
+        editBoardBtn, //used in boards.js to disable in All boards 
+        deleteBoardBtn, //used in boards.js to disable in All boards & Default board
     }
 })()
 

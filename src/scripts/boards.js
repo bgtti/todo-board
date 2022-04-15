@@ -30,14 +30,30 @@ const BoardDisplay = (function () {
 
     //Function that displays board page on the body section
     const displayBoardPage = function (bId) {
+        console.log(bId);
         //the header section
         let boardToBeDisplayed = allBoardsArray.find(o => o.boardId === bId);
         BoardPage.boardName.textContent = `${boardToBeDisplayed["boardName"]}`;
+        BoardPage.addToDoBtn.dataset.todoBoard = bId;
+        (bId === "board0" || bId === "board1") ? BoardPage.deleteBoardBtn.classList.add('hide') : BoardPage.deleteBoardBtn.classList.remove('hide');
+        (bId === "board0") ? BoardPage.editBoardBtn.classList.add('hide') : BoardPage.editBoardBtn.classList.remove('hide');
+
         //the todos
         TodoDisplay.clearExistingCards();
         TodoDisplay.displayTodosInBoard(bId);
 
         PageContent.theBody.append(BoardPage.topSection, BoardPage.mainSection);
+    }
+
+    //Function that gets the id of the board from Nav to display it
+    const boardToDisplay = function (e) {
+        let theTargetBoardId;
+        if (e.target.dataset.dataBoardId === undefined && e.target.parentNode.dataset.dataBoardId) {
+            theTargetBoardId = e.target.parentNode.dataset.dataBoardId;
+        } else if (e.target.dataset.dataBoardId && e.target.parentNode.dataset.dataBoardId === undefined) {
+            theTargetBoardId = e.target.dataset.dataBoardId;
+        }
+        displayBoardPage(theTargetBoardId);
     }
 
     //Function that displays all boards in left Nav. This function is used in index.js to load display the boards in the left Nav.
@@ -48,7 +64,7 @@ const BoardDisplay = (function () {
         const createElement = function (bId, bName) {
             const boardInNavDiv = document.createElement('div');
             boardInNavDiv.classList.add('nav-left-button');
-            boardInNavDiv.setAttribute('data-board', `${bId}`)//check if necessary
+            boardInNavDiv.dataset.dataBoardId = bId; //the id
 
             const boardsIcon = document.createElement('ion-icon');
             bId === "board0" ? boardsIcon.setAttribute('name', 'clipboard') : boardsIcon.setAttribute('name', 'clipboard-outline');
@@ -72,7 +88,8 @@ const BoardDisplay = (function () {
 
     return {
         displayBoardsInNav,
-        displayBoardPage
+        displayBoardPage,
+        boardToDisplay
     }
 })()
 
