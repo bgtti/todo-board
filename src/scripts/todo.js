@@ -190,7 +190,7 @@ const TodoFunctionsModal = (function () {
     }
 
 
-    //opening and closing todo modal
+    //opening and closing add todo modal
     const openAddNewTodoModal = function (theboard) {
         let todoBoardPreSelection = theboard.target.dataset.todoBoard;
 

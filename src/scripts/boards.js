@@ -1,5 +1,7 @@
 //In this file: board module functions and logic
 import { BoardAddBoardModal } from "./boards-add-board-modal.js"//needed here for html elements targeting.
+import { BoardEditBoardModal } from "./boards-edit-board-modal.js"; //needed here for html elements targeting.
+import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed here for html elements targeting.
 import { NavLeft } from "./nav-left.js"//needed here for html elements targeting.
 import { PageContent } from "./body.js" //board page content appended to the body
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
@@ -30,11 +32,12 @@ const BoardDisplay = (function () {
 
     //Function that displays board page on the body section
     const displayBoardPage = function (bId) {
-        console.log(bId);
         //the header section
         let boardToBeDisplayed = allBoardsArray.find(o => o.boardId === bId);
         BoardPage.boardName.textContent = `${boardToBeDisplayed["boardName"]}`;
         BoardPage.addToDoBtn.dataset.todoBoard = bId;
+        BoardPage.editBoardBtn.dataset.editBoard = bId;
+        BoardPage.deleteBoardBtn.dataset.deleteBoard = bId;
         (bId === "board0" || bId === "board1") ? BoardPage.deleteBoardBtn.classList.add('hide') : BoardPage.deleteBoardBtn.classList.remove('hide');
         (bId === "board0") ? BoardPage.editBoardBtn.classList.add('hide') : BoardPage.editBoardBtn.classList.remove('hide');
 
@@ -75,17 +78,11 @@ const BoardDisplay = (function () {
             boardInNavDiv.append(boardsIcon, boardTitle);
 
             NavLeft.boardsSection.append(boardInNavDiv);
-
         };
-
         for (let board of allBoardsArray) {
             createElement(board["boardId"], board["boardName"]);
         };
-
     }
-
-
-
     return {
         displayBoardsInNav,
         displayBoardPage,
@@ -95,46 +92,100 @@ const BoardDisplay = (function () {
 
 //***BOARD MANAGEMENT FUNCTIONS
 const BoardManagement = (function () {
-    //Function that creates new boards. It uses the boardsModals.js - board is created when user presses 'save'.
+    //Function that creates new boards. It uses the add new board modal - board is created when user presses 'save'.
     const addingNewBoard = function () {
-        let theName = BoardAddBoardModal.inputField.value;
-        new Boards(theName);
+        new Boards(BoardAddBoardModal.inputField.value);
         BoardDisplay.displayBoardsInNav();
+    }
+    //Function that updates existing boards. It uses the edit board modal - board name is updated when user presses 'save'.
+    const changingBoardName = function (bId, newName) {
+        for (let board of allBoardsArray) {
+            if (board.boardId === bId) {
+                board.boardName = newName;
+            }
+        }
     }
     return {
         addingNewBoard,
+        changingBoardName,
     }
 })()
 
-//***ADD NEW BOARD MODAL
+//***BOARD MODALS
 const BoardFunctionsModal = (function () {
-    //Funtion that controls the opening of the Add New Board Modal
-    const openAddNewBoardModal = function () {
-        BoardAddBoardModal.addBoardModal.classList.remove('hide');
+    //GENERAL
+    //Function that controls the opening of modals
+    const openBoardModals = function (modal) {
+        modal.classList.remove('hide')
+
     };
-    //Function that controls the closing of the Add New Board Modal
-    const closeAddNewBoardModal = function () {
-        BoardAddBoardModal.addBoardModal.classList.add('hide');
-        BoardAddBoardModal.inputField.value = "";
-        BoardAddBoardModal.requiredFieldWarning.classList.add('hide');
+    //Function that controls the closing of add and edit modals
+    const closeBoardModals = function (modal) {
+        modal.addBoardModal.classList.add('hide');
+        modal.inputField.value = "";
+        modal.requiredFieldWarning.classList.add('hide');
     };
+
+    //ADD NEW BOARD MODAL
     //Function that saves the new board in Add New Board Modal
     const saveNewBoardModal = function () {
         if (BoardAddBoardModal.inputField.value === "" || BoardAddBoardModal.inputField.value === " ") {
             BoardAddBoardModal.requiredFieldWarning.classList.remove('hide')
         } else {
             BoardManagement.addingNewBoard();
-            closeAddNewBoardModal();
+            closeBoardModals(BoardAddBoardModal);
         }
-
     }
-    return {
-        openAddNewBoardModal,
-        closeAddNewBoardModal,
-        saveNewBoardModal
+
+    //EDIT BOARD MODAL
+    //Funtion that controls the opening of the Add New Board Modal
+    let boardBeingEdited;
+
+    const openEditBoardModal = function (e) {
+        for (let board of allBoardsArray) {
+            if (board.boardId === e.target.dataset.editBoard) {
+                BoardEditBoardModal.inputField.value = board.boardName;
+                boardBeingEdited = board.boardId;
+            }
+        }
+        openBoardModals(BoardEditBoardModal.addBoardModal);
+    };
+    //Function that renames board
+    const saveEditBoardModal = function () {
+        BoardManagement.changingBoardName(boardBeingEdited, BoardEditBoardModal.inputField.value);
+        BoardDisplay.displayBoardsInNav();
+        BoardDisplay.displayBoardPage(boardBeingEdited);
+        console.log(allBoardsArray);
+        closeBoardModals(BoardEditBoardModal);
+        boardBeingEdited = undefined;
+    }
+
+    //DELETE BOARD MODAL
+    const openDeleteBoardModal = function (e) {
+        let bName;
+        for (let board of allBoardsArray) {
+            if (board.boardId === e.target.dataset.deleteBoard) {
+                bName = board.boardName;
+            }
+        }
+        BoardDeleteBoardModal.objectToDelete.textContent = `Board "${bName}" and its content are about to be deleted.`
+        openBoardModals(BoardDeleteBoardModal.deleteBoardModal)
+    }
+    const closeDeleteBoardModal = function () {
+        BoardDeleteBoardModal.deleteBoardModal.classList.add('hide');
+    }
+
+
+    return { //all used in index.js E.L.
+        openBoardModals,
+        closeBoardModals,
+        saveNewBoardModal,
+        openEditBoardModal,
+        saveEditBoardModal,
+        openDeleteBoardModal,
+        closeDeleteBoardModal,
     }
 })()
-
 
 
 

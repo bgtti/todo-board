@@ -6,7 +6,8 @@ import { PageContent } from "./scripts/body.js"
 import { BoardAddBoardModal } from "./scripts/boards-add-board-modal.js";
 import { BoardDisplay, BoardFunctionsModal, } from "./scripts/boards.js";
 import { BoardPage } from "./scripts/boards-page-display.js";
-import { testFunction } from "./scripts/boards-edit-board-modal.js";
+import { BoardEditBoardModal } from "./scripts/boards-edit-board-modal.js";
+import { BoardDeleteBoardModal } from './scripts/boards-delete-board-modal.js';
 import { TodoFunctionsModal, TodoDisplay } from "./scripts/todo.js";
 import { ToDoAddModal } from "./scripts/todo-add-todo-modal.js";
 import { Footer } from "./scripts/footer.js";
@@ -30,7 +31,9 @@ theHTML.append(Footer.theFooter);
 
 //Modals
 theMiddle.append(BoardAddBoardModal.addBoardModal);
+theMiddle.append(BoardEditBoardModal.addBoardModal);
 theMiddle.append(ToDoAddModal.addToDoModal);
+theMiddle.append(BoardDeleteBoardModal.deleteBoardModal);
 
 //Displaying the boards in the Nav upon page load
 BoardDisplay.displayBoardsInNav();
@@ -41,47 +44,52 @@ BoardDisplay.displayBoardPage("board0");
 
 //***EVENT LISTENERS
 
+//NAV
 //E.L. for nav module: mobile navigation:
 window.addEventListener('load', NavMobile.navMobileTrigger);
 window.addEventListener('resize', NavMobile.navMobileTrigger);
 NavTop.mobileBurger.addEventListener('click', NavMobile.navMobileControl, false);
-
 //E.L. for nav board buttons: displaying the different boards
-NavLeft.boardsSection.addEventListener('click',
-    BoardDisplay.boardToDisplay
-)//*** PROBLEMATIC: doesnt work properly ***
+NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay)
 
+//BOARD
 //E.L. for board module: add new board modal: open/close/save
-NavLeft.addBoardDiv.addEventListener('click', BoardFunctionsModal.openAddNewBoardModal, false);
-BoardAddBoardModal.closeModalIcon.addEventListener('click', BoardFunctionsModal.closeAddNewBoardModal, false);
+NavLeft.addBoardDiv.addEventListener('click', () => { BoardFunctionsModal.openBoardModals(BoardAddBoardModal.addBoardModal) }, false);
+BoardAddBoardModal.closeModalIcon.addEventListener('click', () => { BoardFunctionsModal.closeBoardModals(BoardAddBoardModal) }, false)
 BoardAddBoardModal.saveBoardButton.addEventListener('click', BoardFunctionsModal.saveNewBoardModal, false);
+//E.L. for board module: edit board: open/close/save
+BoardPage.editBoardBtn.addEventListener('click', BoardFunctionsModal.openEditBoardModal, false);
+BoardEditBoardModal.closeModalIcon.addEventListener('click', () => { BoardFunctionsModal.closeBoardModals(BoardEditBoardModal) }, false)
+BoardEditBoardModal.saveBoardButton.addEventListener('click', BoardFunctionsModal.saveEditBoardModal, false);
+//E.L. for board module: delete board: open/close/delete
+BoardPage.deleteBoardBtn.addEventListener('click', BoardFunctionsModal.openDeleteBoardModal, false);
+BoardDeleteBoardModal.closeModalIcon.addEventListener('click', BoardFunctionsModal.closeDeleteBoardModal, false)
 
+//TODO
 //E.L. for todo module: add new todo modal: open/close
 BoardPage.addToDoBtn.addEventListener('click', TodoFunctionsModal.openAddNewTodoModal, false);
 ToDoAddModal.closeModalIcon.addEventListener('click', TodoFunctionsModal.closeAddNewTodoModal, false);
-
 //E.L. for todo module: add new todo modal: hide and unhide note and checklist options
 ToDoAddModal.notesEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableNoteField, false);
 ToDoAddModal.checklistEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableChecklistField, false);
-
 //E.L. for todo module: add and remove items to/from checklist, check items in list
 ToDoAddModal.addToChecklistBtn.addEventListener("click", TodoFunctionsModal.addChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.deleteChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.checkChecklistItem, false);
-
 //E.L. for todo module: set priority
 ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
-
 //E.L. for todo module: save todo
 ToDoAddModal.saveToDoButton.addEventListener('click', () => {
     TodoFunctionsModal.creatingNewToDoObject();
     BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
 }, false);
 
+
+
 // TodoDisplay.displayTodosInBoard();
 
 // BoardPage
 
 
-testFunction();
+
 

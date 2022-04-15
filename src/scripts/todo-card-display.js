@@ -29,11 +29,13 @@ export let ToDoCard = (function () {
 
         let iconsContainer = document.createElement('div');
         iconsContainer.classList.add('to-do-icons-container')
-        let ellipsisIcon = document.createElement('ion-icon');
-        ellipsisIcon.setAttribute('name', 'ellipsis-horizontal');
+        let viewIcon = document.createElement('ion-icon');
+        viewIcon.setAttribute('name', 'eye');
         let editIcon = document.createElement('ion-icon');
-        editIcon.setAttribute('name', 'create-outline');
-        iconsContainer.append(ellipsisIcon, editIcon);
+        editIcon.setAttribute('name', 'create');
+        let deleteIcon = document.createElement('ion-icon');
+        deleteIcon.setAttribute('name', 'trash');
+        iconsContainer.append(viewIcon, editIcon, deleteIcon);
 
         cardDisplay.append(wrapTitleAndDue, theDescription, iconsContainer);
         targetDiv.append(cardDisplay);
