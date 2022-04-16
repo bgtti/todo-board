@@ -2,7 +2,7 @@
 import { BoardAddBoardModal } from "./boards-add-board-modal.js"//needed here for html elements targeting.
 import { BoardEditBoardModal } from "./boards-edit-board-modal.js"; //needed here for html elements targeting.
 import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed here for html elements targeting.
-import { NavLeft } from "./nav-left.js"//needed here for html elements targeting.
+import { NavLeft } from "../module-01-nav/nav-left"//needed here for html elements targeting.
 import { PageContent } from "../module-02-body/body.js" //board page content appended to the body
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
 import { TodoDisplay } from "../module-05-todos/todo.js" //import function to display todos on board

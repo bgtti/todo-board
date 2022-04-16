@@ -1,5 +1,5 @@
 //In this file: Edit Board Modal HTML Elements
-import "../styles/modals.css";
+import "../module-helpers/modals.css";
 import { boardsModalMaker } from "./boards-modals.js";
 
 let BoardEditBoardModal = (function () {

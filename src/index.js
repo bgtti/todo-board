@@ -4,11 +4,11 @@ import { NavTop } from "./module-01-nav/nav-top";
 import { NavLeft } from "./module-01-nav/nav-left";
 import { NavMobile } from "./module-01-nav/nav-mobile";
 import { PageContent } from "./module-02-body/body.js"
-import { BoardAddBoardModal } from "./scripts/boards-add-board-modal.js";
+import { BoardAddBoardModal } from "./module-04-boards/boards-add-board-modal.js";
 import { BoardDisplay, BoardFunctionsModal, } from "./module-04-boards/boards.js";
 import { BoardPage } from "./module-04-boards/boards-page-display.js";
 import { BoardEditBoardModal } from "./module-04-boards/boards-edit-board-modal.js";
-import { BoardDeleteBoardModal } from './scripts/boards-delete-board-modal.js';
+import { BoardDeleteBoardModal } from './module-04-boards/boards-delete-board-modal.js';
 import { TodoFunctionsModal, TodoDisplay } from "./module-05-todos/todo.js";
 import { ToDoAddModal } from "./module-05-todos/todo-add-todo-modal.js";
 import { Footer } from "./module-03-footer/footer.js";
@@ -73,10 +73,13 @@ ToDoAddModal.closeModalIcon.addEventListener('click', TodoFunctionsModal.closeAd
 //E.L. for todo module: add new todo modal: hide and unhide note and checklist options
 ToDoAddModal.notesEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableNoteField, false);
 ToDoAddModal.checklistEnabledCheckBox.addEventListener("click", TodoFunctionsModal.enableChecklistField, false);
-//E.L. for todo module: add and remove items to/from checklist, check items in list
+//E.L. for todo module: add new todo modal: add and remove items to/from checklist, check items in list
 ToDoAddModal.addToChecklistBtn.addEventListener("click", TodoFunctionsModal.addChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.deleteChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.checkChecklistItem, false);
+//E.L. for todo module: edit todo modal: open
+BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTodoModal, false);
+
 //E.L. for todo module: set priority
 ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
 //E.L. for todo module: save todo

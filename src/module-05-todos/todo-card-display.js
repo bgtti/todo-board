@@ -33,6 +33,7 @@ export let ToDoCard = (function () {
         viewIcon.setAttribute('name', 'eye');
         let editIcon = document.createElement('ion-icon');
         editIcon.setAttribute('name', 'create');
+        editIcon.setAttribute('data-edit-todo', `${tdId}`);//value needed
         let deleteIcon = document.createElement('ion-icon');
         deleteIcon.setAttribute('name', 'trash');
         iconsContainer.append(viewIcon, editIcon, deleteIcon);

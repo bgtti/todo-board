@@ -1,5 +1,5 @@
 //In this file: Top Navbar HTML Elements
-import "../styles/nav.css";
+import "./nav.css";
 
 export const NavTop = (function () {
     const topNavbar = document.createElement('nav');

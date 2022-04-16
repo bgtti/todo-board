@@ -1,4 +1,4 @@
-import "../styles/footer.css";
+import "./footer.css";
 export let Footer = (function () {
     let theFooter = document.createElement('footer');
     let theYear = document.createElement('p');

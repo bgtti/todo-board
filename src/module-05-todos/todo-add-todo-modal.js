@@ -1,5 +1,4 @@
-import "../styles/modals.css";
-import "../index.css";
+import "../module-helpers/modals.css";
 
 //***This is the UI for the modal to add new to do card***
 
@@ -291,6 +290,8 @@ let ToDoAddModal = (function () {
         boardSelectTag, //used in todo.js to append board selection options
         addToChecklist, // used in todo.js to add checklist items to array;
         checklistUl, // used in todo.js to add checklist items to array / used in function bellow to append li;
+
+        modalHeading //used to change heading in edit todo todo.js
 
     }
 })()

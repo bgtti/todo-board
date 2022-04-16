@@ -1,5 +1,5 @@
 //In this file: Left Navbar HTML Elements
-import "../styles/nav.css";
+import "./nav.css";
 
 export const NavLeft = (function () {
     const leftNavBar = document.createElement('nav');

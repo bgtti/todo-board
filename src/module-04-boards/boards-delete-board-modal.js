@@ -1,6 +1,6 @@
 //In this file: delete board modal
-import "../styles/modals.css";
-import { modalMakerDelete } from './modal-maker-delete.js';
+import "../module-helpers/modals.css";
+import { modalMakerDelete } from '../module-helpers/modal-maker-delete.js';
 
 let BoardDeleteBoardModal = (function () {
     //modal container

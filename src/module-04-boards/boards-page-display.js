@@ -1,5 +1,5 @@
 //In this file: Board page display of HTML Elements 
-import "../styles/boardsContent.css";
+import "./boardsContent.css";
 
 let BoardPage = (function () {
     //Section 1: header

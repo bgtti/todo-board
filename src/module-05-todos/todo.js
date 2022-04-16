@@ -63,16 +63,6 @@ const TodoDisplay = (function () {
 
 
 
-// const clearToDoAddModal = function(){
-//     ToDoAddModal.inputFieldName.value = "";
-//     ToDoAddModal.dueDateSelection.value = "";
-//     ToDoAddModal.toDoDescription.value = "";
-//     ToDoAddModal.toDoNotes.value = "";
-// }
-
-
-
-
 //***ADD NEW TODO MODAL
 //Module with functions that manages new todo modal
 const TodoFunctionsModal = (function () {
@@ -216,6 +206,42 @@ const TodoFunctionsModal = (function () {
         console.log(allTodosArray) /////DELETE
         closeAddNewTodoModal();
     }
+
+    //Editing Todo
+
+    //WORK ON THIS FUNCTION:
+    const openingEditTodoModal = function (e) {
+        ToDoAddModal.modalHeading.textContent = "Edit Todo";
+        console.log(e.target.dataset.editTodo);
+        let todoToEdit;
+        for (let todo of allTodosArray) {
+            if (todo.toDoId === e.target.dataset.editTodo) todoToEdit = todo;
+        }
+        console.log(todoToEdit);
+
+        ToDoAddModal.inputFieldName.value = todoToEdit.title;
+        showBoards(todoToEdit.boardId);//here
+
+        // const selectTheClassOfPriorityContainer = function (priorityL) { //here
+        //     resetPriorityClass();
+        //     priorityL.classList.add('selected-priority-level');
+        // }
+        // selectTheClassOfPriorityContainer(todoToEdit.priority);
+
+        // ToDoAddModal.dueDateSelection.value = "" //here
+        ToDoAddModal.toDoDescription.value = todoToEdit.description;
+        ToDoAddModal.toDoNotesContainer.value = todoToEdit.note;
+        ToDoAddModal.toDoNotesContainer.value === "" ? ToDoAddModal.notesEnabledCheckBox.checked = false : ToDoAddModal.notesEnabledCheckBox.checked = true;
+
+        //         if (obj.checklist ==! ""){
+        // ToDoAddModal.toDoChecklistContainer.checked = true;
+        //add li here
+        //}
+
+        ToDoAddModal.addToDoModal.classList.remove('hide');
+    }
+
+
     // title, boardId, priority, dueDate, description, note, checklist
     return { //all returned items used in index.js to be used in E.L.
         openAddNewTodoModal,
@@ -228,6 +254,7 @@ const TodoFunctionsModal = (function () {
         checkChecklistItem,
         checkPriority,
         creatingNewToDoObject,
+        openingEditTodoModal,
     }
 
 })()

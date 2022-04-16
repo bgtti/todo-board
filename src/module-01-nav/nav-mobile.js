@@ -1,5 +1,5 @@
 //In this file: mobile menu management (includes event listeners)
-import "../styles/nav.css";
+import "./nav.css";
 import { NavTop } from "./nav-top.js";
 import { NavLeft } from "./nav-left.js";
 
