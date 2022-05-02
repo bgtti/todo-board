@@ -83,8 +83,13 @@ BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTo
 //E.L. for todo module: set priority
 ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
 //E.L. for todo module: save todo
-ToDoAddModal.saveToDoButton.addEventListener('click', () => {
-    TodoFunctionsModal.creatingNewToDoObject();
+ToDoAddModal.saveToDoButton.addEventListener('click', (e) => {
+    if (!ToDoAddModal.saveToDoButton.dataset.existingToDo || ToDoAddModal.saveToDoButton.dataset.existingToDo === undefined) {
+        TodoFunctionsModal.creatingNewToDoObject();
+    } else {
+        TodoFunctionsModal.savingExistingTodo(e);
+    }
+
     BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
 }, false);
 

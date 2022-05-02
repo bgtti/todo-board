@@ -284,7 +284,7 @@ let ToDoAddModal = (function () {
         // priorityLevel2Container, //used in index.js to read priority value
         priorityLevelIconsContainer,//used in index.js to read priority value / used in todo.js to read priority value
         addToChecklistBtn, //used in index.js to add checklist items
-        saveToDoButton,//used in index.js to save todo
+        saveToDoButton,//used in index.js to save todo / used in todo.js openingEditTodoModal
         toDoNotes, //used in index.js to save todo
 
         boardSelectTag, //used in todo.js to append board selection options

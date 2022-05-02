@@ -22,12 +22,12 @@ class ToDoList {
 }
 
 //Default to dos:
-new ToDoList('My first to do', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '');
+new ToDoList('My first to do', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
 new ToDoList('Yacka Lava', 'board1', '1', '', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
-new ToDoList('Vacation todo', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '');
-new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '');
-new ToDoList('Tralala', 'board2', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '');
-new ToDoList('Jukoukouko', 'board3', '3', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '');
+new ToDoList('Vacation todo', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
+new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Tralala lala lala lalalalala', '');
+new ToDoList('Tralala', 'board2', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
+new ToDoList('Jukoukouko', 'board3', '3', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
 
 //function that displays all todos in board
 const TodoDisplay = (function () {
@@ -133,6 +133,7 @@ const TodoFunctionsModal = (function () {
         for (let checklistItem of checkListItemsArray) {
             ToDoAddModalFunction.addListItem(checkListItemsArray.indexOf(checklistItem), checklistItem[0], checklistItem[1]);
         }
+        console.log(checkListItemsArray); // >>>>>>>>>>>>>>>>>>>>>>>>>>>
     };
 
     const addChecklistItem = function () {
@@ -177,6 +178,7 @@ const TodoFunctionsModal = (function () {
         ToDoAddModal.addToChecklist.value = "";
         ToDoAddModal.checklistEnabledCheckBox.checked = false;
         ToDoAddModal.toDoChecklistContainer.classList.add('hide');
+        ToDoAddModal.saveToDoButton.dataset.existingToDo = undefined;
     }
 
 
@@ -203,46 +205,71 @@ const TodoFunctionsModal = (function () {
             ToDoAddModal.toDoNotes.value,
             checkListItemsArray
         )
-        console.log(allTodosArray) /////DELETE
+        console.log(allTodosArray) /////DELETE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         closeAddNewTodoModal();
     }
 
     //Editing Todo
-
-    //WORK ON THIS FUNCTION:
     const openingEditTodoModal = function (e) {
         ToDoAddModal.modalHeading.textContent = "Edit Todo";
-        console.log(e.target.dataset.editTodo);
         let todoToEdit;
         for (let todo of allTodosArray) {
             if (todo.toDoId === e.target.dataset.editTodo) todoToEdit = todo;
         }
-        console.log(todoToEdit);
-
-        ToDoAddModal.inputFieldName.value = todoToEdit.title;
         showBoards(todoToEdit.boardId);//here
 
-        // const selectTheClassOfPriorityContainer = function (priorityL) { //here
-        //     resetPriorityClass();
-        //     priorityL.classList.add('selected-priority-level');
-        // }
-        // selectTheClassOfPriorityContainer(todoToEdit.priority);
-
-        // ToDoAddModal.dueDateSelection.value = "" //here
+        //Retrieving board values
+        ToDoAddModal.inputFieldName.value = todoToEdit.title;
+        //DUE DATE MISSING HERE
+        resetPriorityClass();
+        let priorityContainer = document.querySelector(`[data-set-priority="${todoToEdit.priority}"]`);
+        priorityContainer.classList.add('selected-priority-level');
         ToDoAddModal.toDoDescription.value = todoToEdit.description;
-        ToDoAddModal.toDoNotesContainer.value = todoToEdit.note;
-        ToDoAddModal.toDoNotesContainer.value === "" ? ToDoAddModal.notesEnabledCheckBox.checked = false : ToDoAddModal.notesEnabledCheckBox.checked = true;
+        if (todoToEdit.note === null || undefined || "" || " ") {
+            ToDoAddModal.notesEnabledCheckBox.checked = false;
+        };
+        if (todoToEdit?.note) {
+            ToDoAddModal.notesEnabledCheckBox.checked = true;
+            ToDoAddModal.toDoNotesContainer.classList.remove('hide');
+            ToDoAddModal.toDoNotes.value = todoToEdit.note;
+        }
+        if (todoToEdit.checklist.length === 0) {
+            ToDoAddModal.checklistEnabledCheckBox.checked = false;
+        } else {
+            ToDoAddModal.checklistEnabledCheckBox.checked = true;
+            ToDoAddModal.toDoChecklistContainer.classList.remove('hide');
+            checkListItemsArray = [...todoToEdit.checklist];
+            showCheckList();
+        }
 
-        //         if (obj.checklist ==! ""){
-        // ToDoAddModal.toDoChecklistContainer.checked = true;
-        //add li here
-        //}
+        //Adding data set to save button
+        ToDoAddModal.saveToDoButton.dataset.existingToDo = todoToEdit.toDoId;
 
+        // open modal with values
         ToDoAddModal.addToDoModal.classList.remove('hide');
     }
 
+    //Saving edited todo
+    const savingExistingTodo = function (e) {
+        function whichTodo(todo) {
+            return todo.toDoId === e.target.dataset.existingToDo
+        }
+        let theExistingTodo = allTodosArray.find(whichTodo)
+        let theExistingTodoIndex = allTodosArray.findIndex(whichTodo)
 
-    // title, boardId, priority, dueDate, description, note, checklist
+        theExistingTodo.title = ToDoAddModal.inputFieldName.value;
+        theExistingTodo.boardId = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
+
+        theExistingTodo.priority = priorityLevelChosen;
+        theExistingTodo.dueDate = ToDoAddModal.dueDateSelection.value; //date needed here!!!!!
+        theExistingTodo.description = ToDoAddModal.toDoDescription.value;
+        theExistingTodo.note = ToDoAddModal.toDoNotes.value;
+        theExistingTodo.checklist = checkListItemsArray;
+
+        allTodosArray[theExistingTodoIndex] = theExistingTodo;
+        closeAddNewTodoModal();
+    }
+
     return { //all returned items used in index.js to be used in E.L.
         openAddNewTodoModal,
         closeAddNewTodoModal,
@@ -255,6 +282,7 @@ const TodoFunctionsModal = (function () {
         checkPriority,
         creatingNewToDoObject,
         openingEditTodoModal,
+        savingExistingTodo,
     }
 
 })()
