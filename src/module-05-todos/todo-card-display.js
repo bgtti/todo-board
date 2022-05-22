@@ -36,6 +36,7 @@ export let ToDoCard = (function () {
         editIcon.setAttribute('data-edit-todo', `${tdId}`);//value needed
         let deleteIcon = document.createElement('ion-icon');
         deleteIcon.setAttribute('name', 'trash');
+        deleteIcon.setAttribute('data-delete-todo', `${tdId}`);//value needed
         iconsContainer.append(viewIcon, editIcon, deleteIcon);
 
         cardDisplay.append(wrapTitleAndDue, theDescription, iconsContainer);

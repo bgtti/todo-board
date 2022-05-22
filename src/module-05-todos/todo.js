@@ -2,6 +2,7 @@ import { ToDoAddModal, ToDoAddModalFunction } from "./todo-add-todo-modal.js"; /
 import { ToDoCard } from "./todo-card-display.js"; //displays cards on board
 import { BoardPage } from "../module-04-boards/boards-page-display.js" //appends todo cards to board
 import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
+import { TodoDeleteTodoModal } from "./todo-delete-todo-modal.js" //open modal, delete todo
 
 let allTodosArray = [];
 let todoCounter = 0;
@@ -205,12 +206,13 @@ const TodoFunctionsModal = (function () {
             ToDoAddModal.toDoNotes.value,
             checkListItemsArray
         )
-        console.log(allTodosArray) /////DELETE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         closeAddNewTodoModal();
     }
 
     //Editing Todo
     const openingEditTodoModal = function (e) {
+        if (!e.target.dataset.editTodo) return
+
         ToDoAddModal.modalHeading.textContent = "Edit Todo";
         let todoToEdit;
         for (let todo of allTodosArray) {
@@ -270,6 +272,8 @@ const TodoFunctionsModal = (function () {
         closeAddNewTodoModal();
     }
 
+
+
     return { //all returned items used in index.js to be used in E.L.
         openAddNewTodoModal,
         closeAddNewTodoModal,
@@ -287,7 +291,71 @@ const TodoFunctionsModal = (function () {
 
 })()
 
+//*** DELETE TODO MODAL
+
+const TodoDeletionFunctions = (function () {
+    let todoUpForDeletion;
+    //open delete todo modal
+    const openDeleteTodoModal = function (e) {
+        if (!e.target.dataset.deleteTodo) return
+
+        let todoToDelete;
+        for (let todo of allTodosArray) {
+            if (todo.toDoId === e.target.dataset.deleteTodo) todoToDelete = todo;
+        }
+        console.log(todoToDelete)
+        todoUpForDeletion = [todoToDelete.toDoId, todoToDelete.title];
+
+        TodoDeleteTodoModal.warningText.classList.remove('hide');
+        TodoDeleteTodoModal.deleteButton.classList.remove('hide');
+        TodoDeleteTodoModal.modalHeading.textContent = "Delete to-do";
+        TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoToDelete.title}" and its content are about to be deleted.`
+        TodoDeleteTodoModal.deleteTodoModal.classList.remove('hide');
+
+    }
+
+    //close delete todo modal
+    const closeDeleteTodoModal = function () {
+        TodoDeleteTodoModal.deleteTodoModal.classList.add('hide');
+        todoUpForDeletion = undefined;
+
+    }
+
+    //delete todo
+    const deleteTodo = function () {
+        let newTodosArray = allTodosArray.filter(todo => todo.toDoId != todoUpForDeletion[0]);
+        allTodosArray = newTodosArray;
+
+        TodoDeleteTodoModal.modalHeading.textContent = "To-do deleted";
+        TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoUpForDeletion[1]}" has been deleted successfully.`
+        TodoDeleteTodoModal.warningText.classList.add('hide');
+        TodoDeleteTodoModal.deleteButton.classList.add('hide');
+
+
+    }
+
+
+    return {
+        openDeleteTodoModal,
+        closeDeleteTodoModal,
+        deleteTodo
+    }
+
+    // const openAddNewTodoModal = function (theboard) {
+    //     let todoBoardPreSelection = theboard.target.dataset.todoBoard;
+
+    //     showBoards(todoBoardPreSelection);
+    //     ToDoAddModal.addToDoModal.classList.remove('hide');
+    // }
+    // const closeAddNewTodoModal = function () {
+    //     ToDoAddModal.addToDoModal.classList.add('hide');
+    //     addTodoModalReset();
+    //     ToDoAddModal.addToDoModal.classList.add('hide');
+    // }
+})()
+
 export {
     TodoFunctionsModal, //used in event listener index.js
-    TodoDisplay // 
+    TodoDisplay, // 
+    TodoDeletionFunctions
 }

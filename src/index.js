@@ -9,8 +9,9 @@ import { BoardDisplay, BoardFunctionsModal, } from "./module-04-boards/boards.js
 import { BoardPage } from "./module-04-boards/boards-page-display.js";
 import { BoardEditBoardModal } from "./module-04-boards/boards-edit-board-modal.js";
 import { BoardDeleteBoardModal } from './module-04-boards/boards-delete-board-modal.js';
-import { TodoFunctionsModal, TodoDisplay } from "./module-05-todos/todo.js";
+import { TodoFunctionsModal, TodoDisplay, TodoDeletionFunctions } from "./module-05-todos/todo.js";
 import { ToDoAddModal } from "./module-05-todos/todo-add-todo-modal.js";
+import { TodoDeleteTodoModal } from "./module-05-todos/todo-delete-todo-modal.js"
 import { Footer } from "./module-03-footer/footer.js";
 
 
@@ -35,6 +36,7 @@ theMiddle.append(BoardAddBoardModal.addBoardModal);
 theMiddle.append(BoardEditBoardModal.addBoardModal);
 theMiddle.append(ToDoAddModal.addToDoModal);
 theMiddle.append(BoardDeleteBoardModal.deleteBoardModal);
+theMiddle.append(TodoDeleteTodoModal.deleteTodoModal);
 
 //Displaying the boards in the Nav upon page load
 BoardDisplay.displayBoardsInNav();
@@ -77,6 +79,7 @@ ToDoAddModal.checklistEnabledCheckBox.addEventListener("click", TodoFunctionsMod
 ToDoAddModal.addToChecklistBtn.addEventListener("click", TodoFunctionsModal.addChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.deleteChecklistItem, false);
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.checkChecklistItem, false);
+
 //E.L. for todo module: edit todo modal: open
 BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTodoModal, false);
 
@@ -93,7 +96,13 @@ ToDoAddModal.saveToDoButton.addEventListener('click', (e) => {
     BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
 }, false);
 
-
+//E.L for todo module: delete todo: open/close/delete
+BoardPage.mainSection.addEventListener('click', TodoDeletionFunctions.openDeleteTodoModal, false);
+TodoDeleteTodoModal.closeModalIcon.addEventListener('click', TodoDeletionFunctions.closeDeleteTodoModal, false);
+TodoDeleteTodoModal.deleteButton.addEventListener('click', () => {
+    TodoDeletionFunctions.deleteTodo();
+    BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
+}, false);
 
 // TodoDisplay.displayTodosInBoard();
 
