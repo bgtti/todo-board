@@ -1,7 +1,11 @@
+import { format } from 'date-fns'
 //In this file: Todo card HTML Elements
 
 export let ToDoCard = (function () {
-    let createCard = function (tdId, tdTitle, tdDescription, tdPriority, targetDiv) {
+    let createCard = function (tdId, tdTitle, tdDate, tdDescription, tdPriority, targetDiv) {
+        let theDate;
+        tdDate === "" ? theDate = "" : theDate = `Due: ${format(new Date(tdDate.replace(/-/g, ",")), 'dd MMMM yyyy')}`;
+
         let cardDisplay = document.createElement('div');
         cardDisplay.setAttribute('data-todo', `${tdId}`);//value needed
         cardDisplay.classList.add('to-do-card');
@@ -17,7 +21,7 @@ export let ToDoCard = (function () {
         cardTitleContainer.append(cardTitle, priorityLevel);
 
         let dueDate = document.createElement('p');
-        dueDate.textContent = `Due: 02/02/2010`; //placeholder
+        dueDate.textContent = theDate;
         dueDate.classList.add('to-do-due');
 
         let wrapTitleAndDue = document.createElement('div');

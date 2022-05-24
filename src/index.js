@@ -5,7 +5,7 @@ import { NavLeft } from "./module-01-nav/nav-left";
 import { NavMobile } from "./module-01-nav/nav-mobile";
 import { PageContent } from "./module-02-body/body.js"
 import { BoardAddBoardModal } from "./module-04-boards/boards-add-board-modal.js";
-import { BoardDisplay, BoardFunctionsModal, } from "./module-04-boards/boards.js";
+import { BoardDisplay, BoardFunctionsModal, BoardManagement } from "./module-04-boards/boards.js";
 import { BoardPage } from "./module-04-boards/boards-page-display.js";
 import { BoardEditBoardModal } from "./module-04-boards/boards-edit-board-modal.js";
 import { BoardDeleteBoardModal } from './module-04-boards/boards-delete-board-modal.js';
@@ -48,10 +48,11 @@ BoardDisplay.displayBoardPage("board0");
 //***EVENT LISTENERS
 
 //NAV
-//E.L. for nav module: mobile navigation:
+// //E.L. for nav module: mobile navigation: 
 window.addEventListener('load', NavMobile.navMobileTrigger);
 window.addEventListener('resize', NavMobile.navMobileTrigger);
 NavTop.mobileBurger.addEventListener('click', NavMobile.navMobileControl, false);
+
 //E.L. for nav board buttons: displaying the different boards
 NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay)
 
@@ -66,7 +67,8 @@ BoardEditBoardModal.closeModalIcon.addEventListener('click', () => { BoardFuncti
 BoardEditBoardModal.saveBoardButton.addEventListener('click', BoardFunctionsModal.saveEditBoardModal, false);
 //E.L. for board module: delete board: open/close/delete
 BoardPage.deleteBoardBtn.addEventListener('click', BoardFunctionsModal.openDeleteBoardModal, false);
-BoardDeleteBoardModal.closeModalIcon.addEventListener('click', BoardFunctionsModal.closeDeleteBoardModal, false)
+BoardDeleteBoardModal.closeModalIcon.addEventListener('click', BoardFunctionsModal.closeDeleteBoardModal, false);
+BoardDeleteBoardModal.deleteButton.addEventListener('click', BoardManagement.deleteBoard, false);
 
 //TODO
 //E.L. for todo module: add new todo modal: open/close
@@ -87,13 +89,14 @@ BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTo
 ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
 //E.L. for todo module: save todo
 ToDoAddModal.saveToDoButton.addEventListener('click', (e) => {
-    if (!ToDoAddModal.saveToDoButton.dataset.existingToDo || ToDoAddModal.saveToDoButton.dataset.existingToDo === undefined) {
-        TodoFunctionsModal.creatingNewToDoObject();
+    let boardToShow;
+    if (!ToDoAddModal.saveToDoButton.dataset.existingToDo || ToDoAddModal.saveToDoButton.dataset.existingToDo === "undefined") {
+        boardToShow = TodoFunctionsModal.creatingNewToDoObject();
     } else {
-        TodoFunctionsModal.savingExistingTodo(e);
+        boardToShow = TodoFunctionsModal.savingExistingTodo(e);
     }
 
-    BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
+    BoardDisplay.displayBoardPage(boardToShow); ////CHANGE!!!!!
 }, false);
 
 //E.L for todo module: delete todo: open/close/delete

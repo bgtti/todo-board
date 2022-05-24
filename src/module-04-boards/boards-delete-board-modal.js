@@ -24,6 +24,8 @@ let BoardDeleteBoardModal = (function () {
 
         objectToDelete, // used in boards.js to manage modal
         closeModalIcon, //used in index.js to close modal
+        warningText, //used in boards.js to manage modal
+        deleteButton //used in boards.js to manage modal
     }
 })()
 

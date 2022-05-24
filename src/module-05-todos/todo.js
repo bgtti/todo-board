@@ -4,6 +4,8 @@ import { BoardPage } from "../module-04-boards/boards-page-display.js" //appends
 import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
 import { TodoDeleteTodoModal } from "./todo-delete-todo-modal.js" //open modal, delete todo
 
+// import { format } from 'date-fns'
+
 let allTodosArray = [];
 let todoCounter = 0;
 
@@ -23,12 +25,12 @@ class ToDoList {
 }
 
 //Default to dos:
-new ToDoList('My first to do', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
-new ToDoList('Yacka Lava', 'board1', '1', '', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
-new ToDoList('Vacation todo', 'board1', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
+new ToDoList('My first to do', 'board1', '0', '2022-05-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
+new ToDoList('Yacka Lava', 'board1', '1', '2022-05-25', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
+new ToDoList('Vacation todo', 'board1', '0', '2022-05-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
 new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Tralala lala lala lalalalala', '');
-new ToDoList('Tralala', 'board2', '0', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
-new ToDoList('Jukoukouko', 'board3', '3', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
+new ToDoList('Tralala', 'board2', '0', '2022-11-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
+new ToDoList('Jukoukouko', 'board3', '3', '2022-08-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
 
 //function that displays all todos in board
 const TodoDisplay = (function () {
@@ -50,7 +52,7 @@ const TodoDisplay = (function () {
         toDoCardsDiv.classList.add('todo-cards-container');
 
         for (let todo of theTodosToDisplay) {
-            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["description"], todo["priority"], toDoCardsDiv);
+            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["dueDate"], todo["description"], todo["priority"], toDoCardsDiv);
         }
         BoardPage.mainSection.append(toDoCardsDiv);
     }
@@ -61,7 +63,7 @@ const TodoDisplay = (function () {
     }
 })()
 
-
+//creatingNewTodo
 
 
 //***ADD NEW TODO MODAL
@@ -197,9 +199,10 @@ const TodoFunctionsModal = (function () {
     }
     //adding new todo
     const creatingNewToDoObject = function () {
+        let theBoardChosen = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
         new ToDoList(
             ToDoAddModal.inputFieldName.value,
-            ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice,
+            theBoardChosen,
             priorityLevelChosen,
             ToDoAddModal.dueDateSelection.value,
             ToDoAddModal.toDoDescription.value,
@@ -207,6 +210,10 @@ const TodoFunctionsModal = (function () {
             checkListItemsArray
         )
         closeAddNewTodoModal();
+
+        console.log(allTodosArray)
+
+        return theBoardChosen
     }
 
     //Editing Todo
@@ -270,6 +277,7 @@ const TodoFunctionsModal = (function () {
 
         allTodosArray[theExistingTodoIndex] = theExistingTodo;
         closeAddNewTodoModal();
+        return theExistingTodo.boardId
     }
 
 
@@ -331,14 +339,20 @@ const TodoDeletionFunctions = (function () {
         TodoDeleteTodoModal.warningText.classList.add('hide');
         TodoDeleteTodoModal.deleteButton.classList.add('hide');
 
+    }
 
+    //delete all todos associated with a particular board (used in boards.js when deleting board)
+    const deleteTodosBelongingToBoard = function (theBoard) {
+        let newTodosArray = allTodosArray.filter(todo => todo.boardId != theBoard);
+        allTodosArray = newTodosArray;
     }
 
 
     return {
         openDeleteTodoModal,
         closeDeleteTodoModal,
-        deleteTodo
+        deleteTodo,
+        deleteTodosBelongingToBoard
     }
 
     // const openAddNewTodoModal = function (theboard) {

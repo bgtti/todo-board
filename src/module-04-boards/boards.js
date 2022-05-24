@@ -5,10 +5,13 @@ import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed
 import { NavLeft } from "../module-01-nav/nav-left"//needed here for html elements targeting.
 import { PageContent } from "../module-02-body/body.js" //board page content appended to the body
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
-import { TodoDisplay } from "../module-05-todos/todo.js" //import function to display todos on board
+import { TodoDisplay, TodoDeletionFunctions } from "../module-05-todos/todo.js" //import function to display todos on board, function to delete todos when board deleted
+
+
 
 let allBoardsArray = []; //the allBoardsArray stores all active boards. 
 let arrayCounter = 0; //the arrayCounter is used to give boards a unique id
+let boardAboutToBeDeleted; //set in modal management, used in board management functions
 
 //*** THE BOARDs 
 class Boards {
@@ -90,12 +93,14 @@ const BoardDisplay = (function () {
     }
 })()
 
-//***BOARD MANAGEMENT FUNCTIONS
+//***BOARD MANAGEMENT FUNCTIONS: ADD, EDIT, DELETE BOARD
 const BoardManagement = (function () {
     //Function that creates new boards. It uses the add new board modal - board is created when user presses 'save'.
     const addingNewBoard = function () {
+        let copyOfCounter = arrayCounter;
         new Boards(BoardAddBoardModal.inputField.value);
         BoardDisplay.displayBoardsInNav();
+        BoardDisplay.displayBoardPage(`board${copyOfCounter++}`);
     }
     //Function that updates existing boards. It uses the edit board modal - board name is updated when user presses 'save'.
     const changingBoardName = function (bId, newName) {
@@ -105,9 +110,33 @@ const BoardManagement = (function () {
             }
         }
     }
+    //Function that deletes the board
+    const deleteBoard = function () {
+        let newBoardsArray = allBoardsArray.filter(board => board.boardId != boardAboutToBeDeleted[0]);
+        allBoardsArray = newBoardsArray;
+        TodoDeletionFunctions.deleteTodosBelongingToBoard(boardAboutToBeDeleted[0]);
+        BoardDisplay.displayBoardsInNav();
+        BoardDisplay.displayBoardPage("board0");
+        BoardFunctionsModal.deleteBoardModalPostDeletionMessage();
+        boardAboutToBeDeleted = undefined;
+    }
+
+    // const deleteTodo = function () {
+    //     let newTodosArray = allTodosArray.filter(todo => todo.toDoId != todoUpForDeletion[0]);
+    //     allTodosArray = newTodosArray;
+
+    //     TodoDeleteTodoModal.modalHeading.textContent = "To-do deleted";
+    //     TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoUpForDeletion[1]}" has been deleted successfully.`
+    //     TodoDeleteTodoModal.warningText.classList.add('hide');
+    //     TodoDeleteTodoModal.deleteButton.classList.add('hide');
+
+
+    // }
+
     return {
         addingNewBoard,
         changingBoardName,
+        deleteBoard
     }
 })()
 
@@ -155,24 +184,30 @@ const BoardFunctionsModal = (function () {
         BoardManagement.changingBoardName(boardBeingEdited, BoardEditBoardModal.inputField.value);
         BoardDisplay.displayBoardsInNav();
         BoardDisplay.displayBoardPage(boardBeingEdited);
-        console.log(allBoardsArray);
         closeBoardModals(BoardEditBoardModal);
         boardBeingEdited = undefined;
     }
 
     //DELETE BOARD MODAL
     const openDeleteBoardModal = function (e) {
-        let bName;
         for (let board of allBoardsArray) {
             if (board.boardId === e.target.dataset.deleteBoard) {
-                bName = board.boardName;
+                boardAboutToBeDeleted = [board.boardId, board.boardName];
             }
         }
-        BoardDeleteBoardModal.objectToDelete.textContent = `Board "${bName}" and its content are about to be deleted.`
+        BoardDeleteBoardModal.objectToDelete.textContent = `Board "${boardAboutToBeDeleted[1]}" and its content are about to be deleted.`
         openBoardModals(BoardDeleteBoardModal.deleteBoardModal)
     }
     const closeDeleteBoardModal = function () {
         BoardDeleteBoardModal.deleteBoardModal.classList.add('hide');
+        boardAboutToBeDeleted = undefined;
+        BoardDeleteBoardModal.deleteButton.classList.remove('hide');
+        BoardDeleteBoardModal.warningText.classList.remove('hide');
+    }
+    const deleteBoardModalPostDeletionMessage = function () {
+        BoardDeleteBoardModal.objectToDelete.textContent = `Board "${boardAboutToBeDeleted[1]}" was successfully deleted.`;
+        BoardDeleteBoardModal.deleteButton.classList.add('hide');
+        BoardDeleteBoardModal.warningText.classList.add('hide');
     }
 
 
@@ -184,9 +219,9 @@ const BoardFunctionsModal = (function () {
         saveEditBoardModal,
         openDeleteBoardModal,
         closeDeleteBoardModal,
+        deleteBoardModalPostDeletionMessage,
     }
 })()
-
 
 
 
@@ -196,5 +231,6 @@ export {
 
     BoardDisplay, //used in index.js to display board list in nav
     allBoardsArray, //used in todo.js to access board options for adding a todo in modal.
+    BoardManagement, //used in index.js
 
 }
