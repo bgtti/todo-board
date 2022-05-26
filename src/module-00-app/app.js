@@ -1,39 +1,30 @@
-//Board and Todo creation
+//This page: Board and Todo global variables and local storage
 
-//*** THE BOARDs and TODOs
+//*************** THE BOARDs and TODOs variables ***************
 let allBoardsArray; //the allBoardsArray stores all active boards.
 let arrayCounter; //the arrayCounter is used to give boards a unique id
-let allTodosArray;
-let todoCounter;
+let allTodosArray; //the allTodosArray stores all active todos.
+let todoCounter; //the todoCounter is used to give boards a unique id
 
-// localStorage.clear();
-//*** LOCAL STORAGE
+//*************** LOCAL STORAGE FUNCTIONS ***************
 const retrieveLocalStorage = function () {
     allBoardsArray = JSON.parse(localStorage.getItem("allBoards")) || [{ boardId: 'board0', boardName: 'All boards' }, { boardId: 'board1', boardName: 'Default' }];
     arrayCounter = JSON.parse(localStorage.getItem("boardsCounter")) || 2;
-    allTodosArray = JSON.parse(localStorage.getItem("allTodos")) || [];
-    todoCounter = JSON.parse(localStorage.getItem("todoCounter")) || 0;
+    allTodosArray = JSON.parse(localStorage.getItem("allTodos")) || [{
+        toDoId: 'td0', title: 'To do example', boardId: 'board1', priority: '2', dueDate: '2022-05-28', description: 'With Todo Boards you can add new to do cards with a description, check-list, and notes. Click "Add to do" to start!', note: 'The description area is too short? Add notes to complement it!', checklist: [['Checklists', true], ['are', true], ['not', false], ['great!', true]]
+    }];
+    todoCounter = JSON.parse(localStorage.getItem("todoCounter")) || 1;
 }()
-// retrieveLocalStorage();
 
 const updateLocalStorage = function () {
-    localStorage.clear();
     localStorage.setItem("allBoards", JSON.stringify(allBoardsArray));
     localStorage.setItem("boardsCounter", JSON.stringify(arrayCounter));
     localStorage.setItem("allTodos", JSON.stringify(allTodosArray));
     localStorage.setItem("todoCounter", JSON.stringify(todoCounter));
 }
-// const exampleAB = function () {
-//     console.log(allBoardsArray)
-//     console.log(arrayCounter)
-//     console.log(allTodosArray)
-//     console.log(todoCounter)
-// }
-// exampleAB()
 
-//*** UPDATING ARRAYS and COUNTERS
+//*************** UPDATING ARRAYS and COUNTERS FUNCTIONS ***************
 const updateAllBoardsArray = function (newArray) {
-    console.log(newArray)
     if (newArray !== undefined) {
         allBoardsArray = newArray;
     }
@@ -41,7 +32,6 @@ const updateAllBoardsArray = function (newArray) {
 }
 const updateBoardCounter = function () {
     arrayCounter++;
-    console.log(arrayCounter);
     updateLocalStorage();
 }
 
@@ -57,14 +47,14 @@ const updateTodoCounter = function () {
     updateLocalStorage();
 }
 
+//*************** PAGE EXPORTS ***************
 export {
-    allBoardsArray,//used in boards.js
+    allBoardsArray,//used in boards.js //used in todo.js
     arrayCounter,//used in boards.js
-    allTodosArray,
-    todoCounter,
-    // updateLocalStorage,
-    // retrieveLocalStorage,
-    updateAllBoardsArray, //used in boards.js //used in todo.js
+    allTodosArray, //used in todo.js
+    todoCounter, //used in todo.js
+
+    updateAllBoardsArray, //used in boards.js 
     updateBoardCounter, //used in boards.js
 
     updateAllTodosArray, //used in todo.js

@@ -1,17 +1,11 @@
 import { allBoardsArray, allTodosArray, todoCounter, updateAllTodosArray, updateTodoCounter } from "../module-00-app/app.js"
-
 import { ToDoAddModal, ToDoAddModalFunction } from "./todo-add-todo-modal.js"; //input field and save button from this file used here.
 import { ToDoCard } from "./todo-card-display.js"; //displays cards on board
 import { BoardPage } from "../module-04-boards/boards-page-display.js" //appends todo cards to board
-// import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
 import { TodoDeleteTodoModal } from "./todo-delete-todo-modal.js" //open modal, delete todo
 import { SchedulePage } from "../module-06-schedule/schedule-page-display.js" //appends todo cards to schedule
 
-// import { format } from 'date-fns'
-
-// let allTodosArray = [];
-// let todoCounter = 0;
-
+//*************** TODO CONSTRUCTOR ***************
 class ToDoList {
     constructor(title, boardId, priority, dueDate, description, note, checklist) {
         this.toDoId = `td${todoCounter}`;
@@ -27,20 +21,10 @@ class ToDoList {
     }
 }
 
-//Default to dos:
-// new ToDoList('My first to do', 'board1', '0', '2022-05-28', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
-// new ToDoList('Yacka Lava', 'board1', '1', '2022-05-27', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
-// new ToDoList('Vacation todo', 'board1', '0', '2022-05-26', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
-// new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Tralala lala lala lalalalala', '');
-// new ToDoList('Tralala', 'board2', '0', '2022-11-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
-// new ToDoList('Jukoukouko', 'board3', '3', '2022-05-28', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
-
+//*************** TODO CARD DISPLAY ***************
 //function that displays all todos in board
 const TodoDisplay = (function () {
     const clearExistingCards = function (target) {
-        // while (BoardPage.mainSection.firstChild) {
-        //     BoardPage.mainSection.removeChild(BoardPage.mainSection.firstChild);
-        // };
         while (target.firstChild) {
             target.removeChild(target.firstChild);
         };
@@ -85,24 +69,19 @@ const TodoDisplay = (function () {
     }
 
     return {
-        displayTodosInBoard, //used in boards.js function to dislay according to board.
+        displayTodosInBoard, //used in boards.js function to display according to board.
         clearExistingCards,
         displayTodosInSchedule
     }
 })()
 
-//creatingNewTodo
-
-
-//***ADD NEW TODO MODAL
+//*************** ADD NEW TODO MODAL ***************
 //Module with functions that manages new todo modal
+
 const TodoFunctionsModal = (function () {
     //showing board options in add todo modal
     const showBoards = function (theboard) {
         TodoDisplay.clearExistingCards(ToDoAddModal.boardSelectTag);
-        // while (ToDoAddModal.boardSelectTag.firstChild) {
-        //     ToDoAddModal.boardSelectTag.removeChild(ToDoAddModal.boardSelectTag.firstChild);
-        // }
         let boardChoices = [...allBoardsArray];
         boardChoices.shift();
 
@@ -116,14 +95,12 @@ const TodoFunctionsModal = (function () {
                 choice.selected = true;
             }
         }
-
     }
 
     //enabling/disabling note and checklist fields
     const enableNoteField = function (e) {
         e.target.checked === true ? ToDoAddModal.toDoNotesContainer.classList.remove('hide') : ToDoAddModal.toDoNotesContainer.classList.add('hide');
     }
-
     const enableChecklistField = function (e) {
         e.target.checked === true ? ToDoAddModal.toDoChecklistContainer.classList.remove('hide') : ToDoAddModal.toDoChecklistContainer.classList.add('hide');
     }
@@ -151,6 +128,7 @@ const TodoFunctionsModal = (function () {
             changeTheClassOfPriorityContainer(e.target);
         }
     }
+
     //adding, removing and checking items to/from checklist
     let checkListItemsArray = [];
 
@@ -159,14 +137,12 @@ const TodoFunctionsModal = (function () {
             ToDoAddModal.checklistUl.removeChild(ToDoAddModal.checklistUl.firstChild);
         }
     }
-
     const showCheckList = function () {
         removeDisplayedCheckListItems();
         for (let checklistItem of checkListItemsArray) {
             ToDoAddModalFunction.addListItem(checkListItemsArray.indexOf(checklistItem), checklistItem[0], checklistItem[1]);
         }
     };
-
     const addChecklistItem = function () {
         if (ToDoAddModal.addToChecklist.value !== "") {
             checkListItemsArray.push([ToDoAddModal.addToChecklist.value, true]);
@@ -174,14 +150,12 @@ const TodoFunctionsModal = (function () {
         }
         showCheckList();
     }
-
     const deleteChecklistItem = function (e) {
         if (e.target.dataset.itemIndexDelete) {
             checkListItemsArray.splice(e.target.dataset.itemIndexDelete, 1);
         }
         showCheckList();
     }
-
     const checkChecklistItem = function (e) {
         if (e.target.dataset.itemIndexCheck) {
             if (checkListItemsArray[e.target.dataset.itemIndexCheck][1] === true) {
@@ -192,6 +166,7 @@ const TodoFunctionsModal = (function () {
         }
         showCheckList();
     }
+
     // resetting modal
     const addTodoModalReset = function () {
         ToDoAddModal.inputFieldName.value = "";
@@ -212,7 +187,6 @@ const TodoFunctionsModal = (function () {
         ToDoAddModal.saveToDoButton.dataset.existingToDo = undefined;
     }
 
-
     //opening and closing add todo modal
     const openAddNewTodoModal = function (theboard) {
         let todoBoardPreSelection = theboard.target.dataset.todoBoard;
@@ -225,6 +199,7 @@ const TodoFunctionsModal = (function () {
         addTodoModalReset();
         ToDoAddModal.addToDoModal.classList.add('hide');
     }
+
     //adding new todo
     const creatingNewToDoObject = function () {
         let theBoardChosen = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
@@ -238,29 +213,25 @@ const TodoFunctionsModal = (function () {
             checkListItemsArray
         )
         closeAddNewTodoModal();
-
-
         return theBoardChosen
     }
-
     //Editing Todo
     const openingEditTodoModal = function (e) {
         if (!e.target.dataset.editTodo) return
-
         ToDoAddModal.modalHeading.textContent = "Edit Todo";
         let todoToEdit;
         for (let todo of allTodosArray) {
             if (todo.toDoId === e.target.dataset.editTodo) todoToEdit = todo;
         }
-        showBoards(todoToEdit.boardId);//here
+        showBoards(todoToEdit.boardId);
 
         //Retrieving board values
         ToDoAddModal.inputFieldName.value = todoToEdit.title;
-        //DUE DATE MISSING HERE
         resetPriorityClass();
         let priorityContainer = document.querySelector(`[data-set-priority="${todoToEdit.priority}"]`);
         priorityContainer.classList.add('selected-priority-level');
         ToDoAddModal.toDoDescription.value = todoToEdit.description;
+        ToDoAddModal.dueDateSelection.value = todoToEdit.dueDate;
         if (todoToEdit.note === null || undefined || "" || " ") {
             ToDoAddModal.notesEnabledCheckBox.checked = false;
         };
@@ -287,11 +258,16 @@ const TodoFunctionsModal = (function () {
 
     //Saving edited todo
     const savingExistingTodo = function (e) {
+
         function whichTodo(todo) {
             return todo.toDoId === e.target.dataset.existingToDo
         }
         let theExistingTodo = allTodosArray.find(whichTodo)
         let theExistingTodoIndex = allTodosArray.findIndex(whichTodo)
+
+        console.log(allTodosArray); ////FUCKED UP
+        console.log(theExistingTodo);
+        console.log(theExistingTodoIndex);
 
         theExistingTodo.title = ToDoAddModal.inputFieldName.value;
         theExistingTodo.boardId = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
@@ -308,12 +284,9 @@ const TodoFunctionsModal = (function () {
         return theExistingTodo.boardId
     }
 
-
-
     return { //all returned items used in index.js to be used in E.L.
         openAddNewTodoModal,
         closeAddNewTodoModal,
-        // showBoards,
         enableNoteField,
         enableChecklistField,
         addChecklistItem,
@@ -324,10 +297,9 @@ const TodoFunctionsModal = (function () {
         openingEditTodoModal,
         savingExistingTodo,
     }
-
 })()
 
-//*** DELETE TODO MODAL
+//*************** DELETING TODO ***************
 
 const TodoDeletionFunctions = (function () {
     let todoUpForDeletion;
@@ -346,7 +318,6 @@ const TodoDeletionFunctions = (function () {
         TodoDeleteTodoModal.modalHeading.textContent = "Delete to-do";
         TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoToDelete.title}" and its content are about to be deleted.`
         TodoDeleteTodoModal.deleteTodoModal.classList.remove('hide');
-
     }
 
     //close delete todo modal
@@ -359,7 +330,6 @@ const TodoDeletionFunctions = (function () {
     //delete todo
     const deleteTodo = function () {
         let newTodosArray = allTodosArray.filter(todo => todo.toDoId != todoUpForDeletion[0]);
-        // allTodosArray = newTodosArray;
         updateAllTodosArray(newTodosArray);
 
         TodoDeleteTodoModal.modalHeading.textContent = "To-do deleted";
@@ -373,10 +343,8 @@ const TodoDeletionFunctions = (function () {
     //delete all todos associated with a particular board (used in boards.js when deleting board)
     const deleteTodosBelongingToBoard = function (theBoard) {
         let newTodosArray = allTodosArray.filter(todo => todo.boardId != theBoard);
-        // allTodosArray = newTodosArray;
         updateAllTodosArray(newTodosArray);
     }
-
 
     return {
         openDeleteTodoModal,
@@ -384,25 +352,11 @@ const TodoDeletionFunctions = (function () {
         deleteTodo,
         deleteTodosBelongingToBoard
     }
-
-    // const openAddNewTodoModal = function (theboard) {
-    //     let todoBoardPreSelection = theboard.target.dataset.todoBoard;
-
-    //     showBoards(todoBoardPreSelection);
-    //     ToDoAddModal.addToDoModal.classList.remove('hide');
-    // }
-    // const closeAddNewTodoModal = function () {
-    //     ToDoAddModal.addToDoModal.classList.add('hide');
-    //     addTodoModalReset();
-    //     ToDoAddModal.addToDoModal.classList.add('hide');
-    // }
 })()
 
+//*************** EXPORTS ***************
 export {
     TodoFunctionsModal, //used in event listener index.js
-    TodoDisplay, // 
-    TodoDeletionFunctions,
-
-    // allTodosArray, // used in localStorage.js
-    // todoCounter // used in localStorage.js
+    TodoDisplay,
+    TodoDeletionFunctions
 }

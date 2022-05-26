@@ -1,5 +1,4 @@
 //In this file: Schedule page display of HTML Elements 
-// import "./boardsContent.css";
 
 let SchedulePage = (function () {
     //Section 1: header
@@ -7,7 +6,6 @@ let SchedulePage = (function () {
     topSection.classList.add('board-content-section-header');
 
     let boardName = document.createElement('h2')
-    // boardName.textContent = "My Board"; //placeholder
 
     topSection.append(boardName);
 
@@ -15,11 +13,10 @@ let SchedulePage = (function () {
     let mainSection = document.createElement('section');
 
     return {
-        topSection, //used in 
-        mainSection, //used in 
-        boardName, //used in 
-
+        topSection,
+        mainSection,
+        boardName
     }
 })()
 
-export { SchedulePage } 
+export { SchedulePage } // used in schedule.js

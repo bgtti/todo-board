@@ -5,7 +5,7 @@ const PageContent = (function () {
     const theBody = document.createElement("div");
     theBody.classList.add('the-body');
 
-    return { theBody } //used in index.js. Page content appended to it from boards.js
+    return { theBody }
 })()
 
 const clearBodyPageContent = function () {
@@ -14,7 +14,7 @@ const clearBodyPageContent = function () {
     }
 }
 export {
-    PageContent,
+    PageContent,//used in index.js. Page content appended to it from boards.js and schedule.js
     clearBodyPageContent
 }
 

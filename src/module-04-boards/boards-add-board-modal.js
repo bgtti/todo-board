@@ -19,7 +19,6 @@ let BoardAddBoardModal = (function () {
     labelForBoardName.textContent = "Board name: ";
     saveBoardButton.innerText = "Save board";
 
-
     return {
         addBoardModal, //used in boards.js in function to open and close the modal. / used in Edit Board Modal to copy content
 

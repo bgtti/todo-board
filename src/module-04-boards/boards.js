@@ -1,6 +1,5 @@
 //In this file: board module functions and logic
 import { allBoardsArray, arrayCounter, updateAllBoardsArray, updateBoardCounter } from "../module-00-app/app.js"
-
 import { BoardAddBoardModal } from "./boards-add-board-modal.js"//needed here for html elements targeting.
 import { BoardEditBoardModal } from "./boards-edit-board-modal.js"; //needed here for html elements targeting.
 import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed here for html elements targeting.
@@ -9,13 +8,9 @@ import { PageContent, clearBodyPageContent } from "../module-02-body/body.js" //
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
 import { TodoDisplay, TodoDeletionFunctions } from "../module-05-todos/todo.js" //import function to display todos on board, function to delete todos when board deleted
 
-// retrieveLocalStorage();
-
-// let allBoardsArray; //the allBoardsArray stores all active boards. 
-// let arrayCounter; //the arrayCounter is used to give boards a unique id
 let boardAboutToBeDeleted; //set in modal management, used in board management functions
 
-//*** THE BOARDs 
+//*************** BOARD CONSTRUCTOR ***************
 class Boards {
     constructor(boardName) {
         this.boardId = `board${arrayCounter}`;
@@ -23,22 +18,16 @@ class Boards {
         allBoardsArray.push(this);
         updateBoardCounter();
     }
-
 }
 
-//Default boards
-// new Boards('All boards'); //Default Board
-// new Boards('Default'); //Default Board
-// new Boards('Work'); //Example
-// new Boards('Learning to code'); //Example
+//*************** BOARD DISPLAY FUNCTIONS ***************
 
-//***BOARD DISPLAY FUNCTIONS
 const BoardDisplay = (function () {
 
     //Function that displays board page on the body section
     const displayBoardPage = function (bId) {
         clearBodyPageContent();
-        //the header section
+        //the header section:
         let boardToBeDisplayed = allBoardsArray.find(o => o.boardId === bId);
         BoardPage.boardName.textContent = `${boardToBeDisplayed["boardName"]}`;
         BoardPage.addToDoBtn.dataset.todoBoard = bId;
@@ -46,8 +35,7 @@ const BoardDisplay = (function () {
         BoardPage.deleteBoardBtn.dataset.deleteBoard = bId;
         (bId === "board0" || bId === "board1") ? BoardPage.deleteBoardBtn.classList.add('hide') : BoardPage.deleteBoardBtn.classList.remove('hide');
         (bId === "board0") ? BoardPage.editBoardBtn.classList.add('hide') : BoardPage.editBoardBtn.classList.remove('hide');
-
-        //the todos
+        //the todos:
         TodoDisplay.clearExistingCards(BoardPage.mainSection);
         TodoDisplay.displayTodosInBoard(bId);
 
@@ -65,7 +53,7 @@ const BoardDisplay = (function () {
         displayBoardPage(theTargetBoardId);
     }
 
-    //Function that displays all boards in left Nav. This function is used in index.js to load display the boards in the left Nav.
+    //This function is used in index.js to load display the boards in the left Nav.
     const displayBoardsInNav = function () {
         while (NavLeft.boardsSection.firstChild) {
             NavLeft.boardsSection.removeChild(NavLeft.boardsSection.firstChild)
@@ -96,7 +84,8 @@ const BoardDisplay = (function () {
     }
 })()
 
-//***BOARD MANAGEMENT FUNCTIONS: ADD, EDIT, DELETE BOARD
+//*************** BOARD MANAGEMENT FUNCTIONS: ADD, EDIT, DELETE BOARD ***************
+
 const BoardManagement = (function () {
     //Function that creates new boards. It uses the add new board modal - board is created when user presses 'save'.
     const addingNewBoard = function () {
@@ -118,25 +107,12 @@ const BoardManagement = (function () {
     const deleteBoard = function () {
         let newBoardsArray = allBoardsArray.filter(board => board.boardId != boardAboutToBeDeleted[0]);
         updateAllBoardsArray(newBoardsArray);
-        // allBoardsArray = newBoardsArray;
         TodoDeletionFunctions.deleteTodosBelongingToBoard(boardAboutToBeDeleted[0]);
         BoardDisplay.displayBoardsInNav();
         BoardDisplay.displayBoardPage("board0");
         BoardFunctionsModal.deleteBoardModalPostDeletionMessage();
         boardAboutToBeDeleted = undefined;
     }
-
-    // const deleteTodo = function () {
-    //     let newTodosArray = allTodosArray.filter(todo => todo.toDoId != todoUpForDeletion[0]);
-    //     allTodosArray = newTodosArray;
-
-    //     TodoDeleteTodoModal.modalHeading.textContent = "To-do deleted";
-    //     TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoUpForDeletion[1]}" has been deleted successfully.`
-    //     TodoDeleteTodoModal.warningText.classList.add('hide');
-    //     TodoDeleteTodoModal.deleteButton.classList.add('hide');
-
-
-    // }
 
     return {
         addingNewBoard,
@@ -145,7 +121,7 @@ const BoardManagement = (function () {
     }
 })()
 
-//***BOARD MODALS
+//*************** BOARD MODALS ***************
 const BoardFunctionsModal = (function () {
     //GENERAL
     //Function that controls the opening of modals
@@ -229,13 +205,10 @@ const BoardFunctionsModal = (function () {
 })()
 
 
-
+//*************** EXPORTS ***************
 
 export {
     BoardFunctionsModal, //used in index.js event listener
     BoardDisplay, //used in index.js to display board list in nav
     BoardManagement, //used in index.js
-
-    // allBoardsArray, //used in todo.js to access board options for adding a todo in modal. // used in localStorage.js
-    // arrayCounter // used in localStorage.js
 }
