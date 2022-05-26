@@ -58,6 +58,8 @@ export const NavLeft = (function () {
     return {
         leftNavBar, //used in index.js to display nav and in nav-mobile.js to manage mobile navigation
         addBoardDiv, //used in index.js for event listener add new board modal
-        boardsSection // used in boards.js function to append board names
+        boardsSection, // used in boards.js function to append board names
+        scheduleDiv1, //used in index.js for E.L. display schedule 'today'
+        scheduleDiv2 //used in index.js for E.L. display schedule 'week'
     }
 })()

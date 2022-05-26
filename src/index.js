@@ -1,5 +1,7 @@
 //*************** IMPORTS ***************
 import "./index.css";
+import { updateLocalStorage } from "./module-00-app/app.js"
+// import { retrieveLocalStorage } from "./module-07-localStorage/localStorage.js"
 import { NavTop } from "./module-01-nav/nav-top";
 import { NavLeft } from "./module-01-nav/nav-left";
 import { NavMobile } from "./module-01-nav/nav-mobile";
@@ -12,8 +14,10 @@ import { BoardDeleteBoardModal } from './module-04-boards/boards-delete-board-mo
 import { TodoFunctionsModal, TodoDisplay, TodoDeletionFunctions } from "./module-05-todos/todo.js";
 import { ToDoAddModal } from "./module-05-todos/todo-add-todo-modal.js";
 import { TodoDeleteTodoModal } from "./module-05-todos/todo-delete-todo-modal.js"
+import { ScheduleDisplay } from "./module-06-schedule/schedule.js"
 import { Footer } from "./module-03-footer/footer.js";
 
+//boardToShow
 
 //***THE PAGE STRUCTURE
 //Main page structure
@@ -46,15 +50,21 @@ BoardDisplay.displayBoardPage("board0");
 
 
 //***EVENT LISTENERS
+//LOCAL STORAGE
+//E.L. for local storage module: importing data on load
+// window.addEventListener('load', retrieveLocalStorage);
 
 //NAV
-// //E.L. for nav module: mobile navigation: 
+//E.L. for nav module: mobile navigation: 
 window.addEventListener('load', NavMobile.navMobileTrigger);
 window.addEventListener('resize', NavMobile.navMobileTrigger);
 NavTop.mobileBurger.addEventListener('click', NavMobile.navMobileControl, false);
 
 //E.L. for nav board buttons: displaying the different boards
-NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay)
+NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay);
+//E.L. for nav schedule buttons: displaying the different schedules
+NavLeft.scheduleDiv1.addEventListener('click', ScheduleDisplay.displayToday);
+NavLeft.scheduleDiv2.addEventListener('click', ScheduleDisplay.displayWeek);
 
 //BOARD
 //E.L. for board module: add new board modal: open/close/save
@@ -83,7 +93,8 @@ ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.deleteChec
 ToDoAddModal.checklistUl.addEventListener("click", TodoFunctionsModal.checkChecklistItem, false);
 
 //E.L. for todo module: edit todo modal: open
-BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTodoModal, false);
+// BoardPage.mainSection.addEventListener('click', TodoFunctionsModal.openingEditTodoModal, false);
+PageContent.theBody.addEventListener('click', TodoFunctionsModal.openingEditTodoModal, false);
 
 //E.L. for todo module: set priority
 ToDoAddModal.priorityLevelIconsContainer.addEventListener("click", TodoFunctionsModal.checkPriority);
@@ -96,20 +107,19 @@ ToDoAddModal.saveToDoButton.addEventListener('click', (e) => {
         boardToShow = TodoFunctionsModal.savingExistingTodo(e);
     }
 
-    BoardDisplay.displayBoardPage(boardToShow); ////CHANGE!!!!!
+    BoardDisplay.displayBoardPage(boardToShow);
 }, false);
 
 //E.L for todo module: delete todo: open/close/delete
-BoardPage.mainSection.addEventListener('click', TodoDeletionFunctions.openDeleteTodoModal, false);
+PageContent.theBody.addEventListener('click', TodoDeletionFunctions.openDeleteTodoModal, false);
 TodoDeleteTodoModal.closeModalIcon.addEventListener('click', TodoDeletionFunctions.closeDeleteTodoModal, false);
 TodoDeleteTodoModal.deleteButton.addEventListener('click', () => {
-    TodoDeletionFunctions.deleteTodo();
-    BoardDisplay.displayBoardPage("board0"); ////CHANGE!!!!!
+    BoardDisplay.displayBoardPage(TodoDeletionFunctions.deleteTodo());
 }, false);
 
-// TodoDisplay.displayTodosInBoard();
+//SCHEDULE
+//E.L. for schedule module: today
 
-// BoardPage
 
 
 

@@ -1,16 +1,18 @@
 //In this file: board module functions and logic
+import { allBoardsArray, arrayCounter, updateAllBoardsArray, updateBoardCounter } from "../module-00-app/app.js"
+
 import { BoardAddBoardModal } from "./boards-add-board-modal.js"//needed here for html elements targeting.
 import { BoardEditBoardModal } from "./boards-edit-board-modal.js"; //needed here for html elements targeting.
 import { BoardDeleteBoardModal } from "./boards-delete-board-modal.js"; //needed here for html elements targeting.
 import { NavLeft } from "../module-01-nav/nav-left"//needed here for html elements targeting.
-import { PageContent } from "../module-02-body/body.js" //board page content appended to the body
+import { PageContent, clearBodyPageContent } from "../module-02-body/body.js" //board page content appended to the body
 import { BoardPage } from "./boards-page-display.js" //appended to the body by a function
 import { TodoDisplay, TodoDeletionFunctions } from "../module-05-todos/todo.js" //import function to display todos on board, function to delete todos when board deleted
 
+// retrieveLocalStorage();
 
-
-let allBoardsArray = []; //the allBoardsArray stores all active boards. 
-let arrayCounter = 0; //the arrayCounter is used to give boards a unique id
+// let allBoardsArray; //the allBoardsArray stores all active boards. 
+// let arrayCounter; //the arrayCounter is used to give boards a unique id
 let boardAboutToBeDeleted; //set in modal management, used in board management functions
 
 //*** THE BOARDs 
@@ -19,22 +21,23 @@ class Boards {
         this.boardId = `board${arrayCounter}`;
         this.boardName = boardName;
         allBoardsArray.push(this);
-        arrayCounter++;
+        updateBoardCounter();
     }
 
 }
 
 //Default boards
-new Boards('All boards'); //Default Board
-new Boards('Default'); //Default Board
-new Boards('Work'); //Example
-new Boards('Learning to code'); //Example
+// new Boards('All boards'); //Default Board
+// new Boards('Default'); //Default Board
+// new Boards('Work'); //Example
+// new Boards('Learning to code'); //Example
 
 //***BOARD DISPLAY FUNCTIONS
 const BoardDisplay = (function () {
 
     //Function that displays board page on the body section
     const displayBoardPage = function (bId) {
+        clearBodyPageContent();
         //the header section
         let boardToBeDisplayed = allBoardsArray.find(o => o.boardId === bId);
         BoardPage.boardName.textContent = `${boardToBeDisplayed["boardName"]}`;
@@ -45,7 +48,7 @@ const BoardDisplay = (function () {
         (bId === "board0") ? BoardPage.editBoardBtn.classList.add('hide') : BoardPage.editBoardBtn.classList.remove('hide');
 
         //the todos
-        TodoDisplay.clearExistingCards();
+        TodoDisplay.clearExistingCards(BoardPage.mainSection);
         TodoDisplay.displayTodosInBoard(bId);
 
         PageContent.theBody.append(BoardPage.topSection, BoardPage.mainSection);
@@ -109,11 +112,13 @@ const BoardManagement = (function () {
                 board.boardName = newName;
             }
         }
+        updateAllBoardsArray()
     }
     //Function that deletes the board
     const deleteBoard = function () {
         let newBoardsArray = allBoardsArray.filter(board => board.boardId != boardAboutToBeDeleted[0]);
-        allBoardsArray = newBoardsArray;
+        updateAllBoardsArray(newBoardsArray);
+        // allBoardsArray = newBoardsArray;
         TodoDeletionFunctions.deleteTodosBelongingToBoard(boardAboutToBeDeleted[0]);
         BoardDisplay.displayBoardsInNav();
         BoardDisplay.displayBoardPage("board0");
@@ -228,9 +233,9 @@ const BoardFunctionsModal = (function () {
 
 export {
     BoardFunctionsModal, //used in index.js event listener
-
     BoardDisplay, //used in index.js to display board list in nav
-    allBoardsArray, //used in todo.js to access board options for adding a todo in modal.
     BoardManagement, //used in index.js
 
+    // allBoardsArray, //used in todo.js to access board options for adding a todo in modal. // used in localStorage.js
+    // arrayCounter // used in localStorage.js
 }

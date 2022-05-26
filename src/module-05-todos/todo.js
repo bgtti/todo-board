@@ -1,13 +1,16 @@
+import { allBoardsArray, allTodosArray, todoCounter, updateAllTodosArray, updateTodoCounter } from "../module-00-app/app.js"
+
 import { ToDoAddModal, ToDoAddModalFunction } from "./todo-add-todo-modal.js"; //input field and save button from this file used here.
 import { ToDoCard } from "./todo-card-display.js"; //displays cards on board
 import { BoardPage } from "../module-04-boards/boards-page-display.js" //appends todo cards to board
-import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
+// import { allBoardsArray } from "../module-04-boards/boards.js" //reads existing boards
 import { TodoDeleteTodoModal } from "./todo-delete-todo-modal.js" //open modal, delete todo
+import { SchedulePage } from "../module-06-schedule/schedule-page-display.js" //appends todo cards to schedule
 
 // import { format } from 'date-fns'
 
-let allTodosArray = [];
-let todoCounter = 0;
+// let allTodosArray = [];
+// let todoCounter = 0;
 
 class ToDoList {
     constructor(title, boardId, priority, dueDate, description, note, checklist) {
@@ -20,46 +23,71 @@ class ToDoList {
         this.note = note;
         this.checklist = checklist;
         allTodosArray.push(this);
-        todoCounter++;
+        updateTodoCounter();
     }
 }
 
 //Default to dos:
-new ToDoList('My first to do', 'board1', '0', '2022-05-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
-new ToDoList('Yacka Lava', 'board1', '1', '2022-05-25', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
-new ToDoList('Vacation todo', 'board1', '0', '2022-05-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
-new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Tralala lala lala lalalalala', '');
-new ToDoList('Tralala', 'board2', '0', '2022-11-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
-new ToDoList('Jukoukouko', 'board3', '3', '2022-08-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
+// new ToDoList('My first to do', 'board1', '0', '2022-05-28', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Change bed linen', [['Buy Milk', true], ['Do laundry', false], ['Groceries', true]]);
+// new ToDoList('Yacka Lava', 'board1', '1', '2022-05-27', 'hvjsa jhsgjvsc scjhbsbv jbssbmsbscmnbc', '', '');
+// new ToDoList('Vacation todo', 'board1', '0', '2022-05-26', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Yuck Yuck Yeah', '');
+// new ToDoList('Yaliee', 'board2', '2', '', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'Tralala lala lala lalalalala', '');
+// new ToDoList('Tralala', 'board2', '0', '2022-11-25', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', 'I am a note example', '');
+// new ToDoList('Jukoukouko', 'board3', '3', '2022-05-28', 'This is an important list. Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla Blablabla', '', [['Do this', true], ['Do that', false], ['Do lala', true]]);
 
 //function that displays all todos in board
 const TodoDisplay = (function () {
-    const clearExistingCards = function () {
-        while (BoardPage.mainSection.firstChild) {
-            BoardPage.mainSection.removeChild(BoardPage.mainSection.firstChild);
+    const clearExistingCards = function (target) {
+        // while (BoardPage.mainSection.firstChild) {
+        //     BoardPage.mainSection.removeChild(BoardPage.mainSection.firstChild);
+        // };
+        while (target.firstChild) {
+            target.removeChild(target.firstChild);
         };
     }
-    const displayTodosInBoard = function (bId) {
 
-        let theTodosToDisplay = [];
-        if (bId === "board0") {
-            theTodosToDisplay = [...allTodosArray]
-        } else {
-            theTodosToDisplay = allTodosArray.filter(todos => todos["boardId"] === bId)
-        };
+    let theTodosToDisplay = [];
 
+    const createCardDiv = function () {
         let toDoCardsDiv = document.createElement('div');
         toDoCardsDiv.classList.add('todo-cards-container');
 
         for (let todo of theTodosToDisplay) {
             ToDoCard.createCard(todo["toDoId"], todo["title"], todo["dueDate"], todo["description"], todo["priority"], toDoCardsDiv);
         }
-        BoardPage.mainSection.append(toDoCardsDiv);
+
+        return toDoCardsDiv
+    }
+    const displayTodosInBoard = function (bId) {
+        if (bId === "board0") {
+            theTodosToDisplay = [...allTodosArray]
+        } else {
+            theTodosToDisplay = allTodosArray.filter(todos => todos["boardId"] === bId)
+        };
+
+        BoardPage.mainSection.append(createCardDiv())
+    }
+
+    const displayTodosInSchedule = function (startDate, endDate) {
+        theTodosToDisplay = allTodosArray.filter(todos =>
+            todos["dueDate"] >= startDate && todos["dueDate"] < endDate
+        );
+        theTodosToDisplay.sort(function (a, b) {
+            if (a.dueDate < b.dueDate) {
+                return -1;
+            }
+            if (a.dueDate > b.dueDate) {
+                return 1;
+            }
+            return 0;
+        })
+        SchedulePage.mainSection.append(createCardDiv())
     }
 
     return {
         displayTodosInBoard, //used in boards.js function to dislay according to board.
         clearExistingCards,
+        displayTodosInSchedule
     }
 })()
 
@@ -71,9 +99,10 @@ const TodoDisplay = (function () {
 const TodoFunctionsModal = (function () {
     //showing board options in add todo modal
     const showBoards = function (theboard) {
-        while (ToDoAddModal.boardSelectTag.firstChild) {
-            ToDoAddModal.boardSelectTag.removeChild(ToDoAddModal.boardSelectTag.firstChild);
-        }
+        TodoDisplay.clearExistingCards(ToDoAddModal.boardSelectTag);
+        // while (ToDoAddModal.boardSelectTag.firstChild) {
+        //     ToDoAddModal.boardSelectTag.removeChild(ToDoAddModal.boardSelectTag.firstChild);
+        // }
         let boardChoices = [...allBoardsArray];
         boardChoices.shift();
 
@@ -136,7 +165,6 @@ const TodoFunctionsModal = (function () {
         for (let checklistItem of checkListItemsArray) {
             ToDoAddModalFunction.addListItem(checkListItemsArray.indexOf(checklistItem), checklistItem[0], checklistItem[1]);
         }
-        console.log(checkListItemsArray); // >>>>>>>>>>>>>>>>>>>>>>>>>>>
     };
 
     const addChecklistItem = function () {
@@ -211,7 +239,6 @@ const TodoFunctionsModal = (function () {
         )
         closeAddNewTodoModal();
 
-        console.log(allTodosArray)
 
         return theBoardChosen
     }
@@ -277,6 +304,7 @@ const TodoFunctionsModal = (function () {
 
         allTodosArray[theExistingTodoIndex] = theExistingTodo;
         closeAddNewTodoModal();
+        updateAllTodosArray();
         return theExistingTodo.boardId
     }
 
@@ -311,8 +339,7 @@ const TodoDeletionFunctions = (function () {
         for (let todo of allTodosArray) {
             if (todo.toDoId === e.target.dataset.deleteTodo) todoToDelete = todo;
         }
-        console.log(todoToDelete)
-        todoUpForDeletion = [todoToDelete.toDoId, todoToDelete.title];
+        todoUpForDeletion = [todoToDelete.toDoId, todoToDelete.title, todoToDelete.boardId];
 
         TodoDeleteTodoModal.warningText.classList.remove('hide');
         TodoDeleteTodoModal.deleteButton.classList.remove('hide');
@@ -332,19 +359,22 @@ const TodoDeletionFunctions = (function () {
     //delete todo
     const deleteTodo = function () {
         let newTodosArray = allTodosArray.filter(todo => todo.toDoId != todoUpForDeletion[0]);
-        allTodosArray = newTodosArray;
+        // allTodosArray = newTodosArray;
+        updateAllTodosArray(newTodosArray);
 
         TodoDeleteTodoModal.modalHeading.textContent = "To-do deleted";
         TodoDeleteTodoModal.objectToDelete.textContent = `To-do "${todoUpForDeletion[1]}" has been deleted successfully.`
         TodoDeleteTodoModal.warningText.classList.add('hide');
         TodoDeleteTodoModal.deleteButton.classList.add('hide');
 
+        return todoUpForDeletion[2]
     }
 
     //delete all todos associated with a particular board (used in boards.js when deleting board)
     const deleteTodosBelongingToBoard = function (theBoard) {
         let newTodosArray = allTodosArray.filter(todo => todo.boardId != theBoard);
-        allTodosArray = newTodosArray;
+        // allTodosArray = newTodosArray;
+        updateAllTodosArray(newTodosArray);
     }
 
 
@@ -371,5 +401,8 @@ const TodoDeletionFunctions = (function () {
 export {
     TodoFunctionsModal, //used in event listener index.js
     TodoDisplay, // 
-    TodoDeletionFunctions
+    TodoDeletionFunctions,
+
+    // allTodosArray, // used in localStorage.js
+    // todoCounter // used in localStorage.js
 }
