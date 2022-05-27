@@ -24,7 +24,8 @@ export const NavTop = (function () {
 
     const clearLocalStorageBtn = document.createElement('div');
     clearLocalStorageBtn.textContent = "Clear local storage";
-    clearLocalStorageBtn.classList.add("board-content-option-buttons"); //CHANGE
+    clearLocalStorageBtn.classList.add("btn-type-1");
+    clearLocalStorageBtn.classList.add("clr-storage-btn-top");
 
     const topNavLeft = document.createElement('div');
     topNavLeft.classList.add('nav-top-left');
@@ -33,7 +34,7 @@ export const NavTop = (function () {
     mobileBurger.classList.add('nav-icon-burger');
     topNavLeft.append(mobileBurger);
 
-    topNavbar.append(topNavRight, clearLocalStorageBtn, topNavLeft);
+    topNavbar.append(topNavRight, topNavLeft, clearLocalStorageBtn);
 
     return {
         topNavbar, //used in index.js to display nav

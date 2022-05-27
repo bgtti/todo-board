@@ -4,18 +4,38 @@
 	--hoverNavBtnColor: rgb(206, 206, 206);
 	--modalContainerBackgroundColor: rgba(206, 206, 206, 0.781);
 	--modalSubcontainerBackgroundColor: rgb(255, 255, 255);
-	--greenColor: #439a86;
-	--colorOrange: #ff6600; 
-	--colorBlue: #427bcc;
-	--colorRed: #df3f31;
-	--colorYellow: #f1a423;
-	--colorLightGrey: rgb(214, 214, 214);;
+	--greenColor: #45b557;
+	--colorOrange: #ef7b00; 
+	--colorBlue: #9ec0d1;
+	--colorRed: #cf2727;
+	--colorYellow: #f4b947;
+	--colorLightGrey: #f1f0f5;
 	--fLato: 'Lato', sans-serif;
 	--mMargin: 10px;
 	--border: 2px solid var(--borderColor);
 	--borderLight: 2px solid rgb(206, 206, 206);
 	--buttonPadding: 5px 10px;
 }
+
+/* --greenColor: #439a86;
+--colorOrange: #ff6600;
+--colorBlue: #427bcc;
+--colorRed: #df3f31;
+--colorYellow: #f1a423;
+--colorLightGrey: rgb(214, 214, 214);
+--colorBlue: #002e47;
+		--colorBlue: #4590b6;
+;
+; */
+
+/* earthy:
+--greenColor: #73775e;
+--colorOrange: #c5571d;
+--colorBlue: #96b4b7;
+--colorRed: #a11e39;
+--colorYellow: #bf9771;
+--colorLightGrey: #f5f2ef;
+ */
 * {
 	margin: 0;
 	padding: 0;
@@ -40,8 +60,9 @@ body,
 	justify-content: space-between;
 }
 .middle-div {
-	height: 100%;
+	/* height: 100%; */
 	display: flex;
+	flex-grow: 5;
 }
 .the-body {
 	margin: var(--mMargin);
@@ -69,5 +90,26 @@ body,
 	color: var(--colorRed);
 }
 .priority-level-3 {
-	color: var(--colorBlue);
+	color: var(--greenColor);
+}
+
+/* BUTTONS GENERAL */
+.btn-type-1, .btn-type-2,.btn-type-3 {
+	padding: var(--buttonPadding);
+border: var(--border);
+border-radius: 5px;
+font-weight: bold;
+font-size: 13px;
+cursor: pointer;
+}
+
+.btn-type-1{
+background-color: var(--colorLightGrey);
+/* color: white; */
+}
+.btn-type-2{
+background-color: var(--colorOrange);
+}
+.btn-type-3{
+background-color: var(--colorRed);
 }

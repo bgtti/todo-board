@@ -1,13 +1,3 @@
-/* :root {
-	--fontColor: rgb(34, 34, 34);
-	--borderColor: rgb(34, 34, 34);
-	--hoverNavBtnColor: rgb(206, 206, 206);
-	--greenColor: #439a86;
-	--fLato: 'Lato', sans-serif;
-	--mMargin: 10px;
-	--border: 2px solid var(--borderColor);
-} */
-
 /* TOP NAV */
 .nav-top-bar {
 	display: flex;
@@ -15,15 +5,12 @@
 	justify-content: space-between;
 	padding: var(--mMargin);
 	border-bottom: var(--border);
-
 }
 .nav-top-right{
 	display: flex;
 	align-items: center;
 }
 .nav-top-right div {
-	
-	/* border: 1px solid rgb(226, 226, 226); */
 	width: 45px;
 	height: 30px;
 }
@@ -63,6 +50,19 @@
 		display: none;
 	}
 }
+.clr-storage-btn-top{
+	border-color: grey;
+	color: grey;
+}
+.clr-storage-btn-top:hover{
+	border-color: var(--border);
+	color: var(--fontColor);
+}
+@media screen and (max-width: 800px) {
+	.clr-storage-btn-top {
+		display: none;
+	}
+}
 
 /* LEFT NAV */
 .nav-left-bar {
@@ -76,6 +76,13 @@
 }
 .nav-left-bar h2 {
 	margin: var(--mMargin) 0;
+}
+
+@media screen and (max-width: 800px) {
+	.nav-left-bar {
+		background-color: white;
+		z-index: 100;
+	}
 }
 /* nav btns */
 .nav-left-button {
@@ -96,6 +103,21 @@
 .nav-add-board-button ion-icon,
 .nav-add-board-button h3 {
 	color: var(--colorBlue);
+}
+
+.clr-storage-btn-mobile{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: var(--mMargin);
+	border-color: grey;
+	color: grey;
+}
+
+@media screen and (min-width: 800px) {
+	.clr-storage-btn-mobile {
+		display: none;
+	}
 }
 
 /* MOBILE NAV */

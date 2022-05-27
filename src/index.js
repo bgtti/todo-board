@@ -50,6 +50,7 @@ NavTop.clearLocalStorageBtn.addEventListener('click', () => { window.localStorag
 window.addEventListener('load', NavMobile.navMobileTrigger);
 window.addEventListener('resize', NavMobile.navMobileTrigger);
 NavTop.mobileBurger.addEventListener('click', NavMobile.navMobileControl, false);
+NavLeft.clearLocalStorageBtn.addEventListener('click', () => { window.localStorage.clear(); location.reload() }, false);
 //E.L. for nav board buttons: displaying the different boards
 NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay);
 //E.L. for nav schedule buttons: displaying the different schedules

@@ -33,15 +33,15 @@ export let ToDoCard = (function () {
 
         let iconsContainer = document.createElement('div');
         iconsContainer.classList.add('to-do-icons-container')
-        let viewIcon = document.createElement('ion-icon');
-        viewIcon.setAttribute('name', 'eye');
+        // let viewIcon = document.createElement('ion-icon');
+        // viewIcon.setAttribute('name', 'eye');
         let editIcon = document.createElement('ion-icon');
         editIcon.setAttribute('name', 'create');
         editIcon.setAttribute('data-edit-todo', `${tdId}`);//value needed
         let deleteIcon = document.createElement('ion-icon');
         deleteIcon.setAttribute('name', 'trash');
         deleteIcon.setAttribute('data-delete-todo', `${tdId}`);//value needed
-        iconsContainer.append(viewIcon, editIcon, deleteIcon);
+        iconsContainer.append(editIcon, deleteIcon);
 
         cardDisplay.append(wrapTitleAndDue, theDescription, iconsContainer);
         targetDiv.append(cardDisplay);

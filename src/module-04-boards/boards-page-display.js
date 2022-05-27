@@ -7,25 +7,21 @@ let BoardPage = (function () {
     topSection.classList.add('board-content-section-header');
 
     let boardName = document.createElement('h2')
-    // boardName.textContent = "My Board"; //placeholder
 
     let mainBtnsContainer = document.createElement('div');
     mainBtnsContainer.classList.add('board-content-main-btns-container')
 
     let addToDoBtn = document.createElement('div');
     addToDoBtn.textContent = "Add to do";
-    addToDoBtn.classList.add("board-content-option-buttons");
-    addToDoBtn.classList.add("board-content-option-buttons-add");
+    addToDoBtn.classList.add("btn-type-2");
 
     let editBoardBtn = document.createElement('div');
     editBoardBtn.textContent = "Edit board";
-    editBoardBtn.classList.add("board-content-option-buttons");
-    editBoardBtn.classList.add("board-content-option-buttons-edit");
+    editBoardBtn.classList.add("btn-type-1");
 
     let deleteBoardBtn = document.createElement('div');
     deleteBoardBtn.textContent = "Delete board";
-    deleteBoardBtn.classList.add("board-content-option-buttons");
-    deleteBoardBtn.classList.add("board-content-option-buttons-delete");
+    deleteBoardBtn.classList.add("btn-type-1");
 
     mainBtnsContainer.append(addToDoBtn, editBoardBtn, deleteBoardBtn);
 

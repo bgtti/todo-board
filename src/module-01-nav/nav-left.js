@@ -52,14 +52,21 @@ export const NavLeft = (function () {
 
     addNewBoardBtnSection.append(addBoardDiv);
 
+    //clear storage button (visible in mobile nav only)
+    const clearLocalStorageBtn = document.createElement('div');
+    clearLocalStorageBtn.textContent = "Clear local storage";
+    clearLocalStorageBtn.classList.add("btn-type-1");
+    clearLocalStorageBtn.classList.add("clr-storage-btn-mobile");
+
     //adding stuff to left nav:
-    leftNavBar.append(scheduleSectionTitle, scheduleSection, boardsSectionTitle, boardsSection, addNewBoardBtnSection)
+    leftNavBar.append(scheduleSectionTitle, scheduleSection, boardsSectionTitle, boardsSection, addNewBoardBtnSection, clearLocalStorageBtn)
 
     return {
         leftNavBar, //used in index.js to display nav and in nav-mobile.js to manage mobile navigation
         addBoardDiv, //used in index.js for event listener add new board modal
         boardsSection, // used in boards.js function to append board names
         scheduleDiv1, //used in index.js for E.L. display schedule 'today'
-        scheduleDiv2 //used in index.js for E.L. display schedule 'week'
+        scheduleDiv2, //used in index.js for E.L. display schedule 'week'
+        clearLocalStorageBtn // used in index.js for E.L. to clear storage
     }
 })()
