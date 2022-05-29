@@ -17,25 +17,6 @@
 	--buttonPadding: 5px 10px;
 }
 
-/* --greenColor: #439a86;
---colorOrange: #ff6600;
---colorBlue: #427bcc;
---colorRed: #df3f31;
---colorYellow: #f1a423;
---colorLightGrey: rgb(214, 214, 214);
---colorBlue: #002e47;
-		--colorBlue: #4590b6;
-;
-; */
-
-/* earthy:
---greenColor: #73775e;
---colorOrange: #c5571d;
---colorBlue: #96b4b7;
---colorRed: #a11e39;
---colorYellow: #bf9771;
---colorLightGrey: #f5f2ef;
- */
 * {
 	margin: 0;
 	padding: 0;
@@ -56,11 +37,9 @@ body,
 .content {
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 	justify-content: space-between;
 }
 .middle-div {
-	/* height: 100%; */
 	display: flex;
 	flex-grow: 5;
 }
@@ -96,20 +75,19 @@ body,
 /* BUTTONS GENERAL */
 .btn-type-1, .btn-type-2,.btn-type-3 {
 	padding: var(--buttonPadding);
-border: var(--border);
-border-radius: 5px;
-font-weight: bold;
-font-size: 13px;
-cursor: pointer;
+	border: var(--border);
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 13px;
+	cursor: pointer;
 }
 
 .btn-type-1{
-background-color: var(--colorLightGrey);
-/* color: white; */
+	background-color: var(--colorLightGrey);
 }
 .btn-type-2{
-background-color: var(--colorOrange);
+	background-color: var(--colorOrange);
 }
 .btn-type-3{
-background-color: var(--colorRed);
+	background-color: var(--colorRed);
 }

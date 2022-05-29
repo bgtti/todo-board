@@ -19,6 +19,7 @@ export const NavLeft = (function () {
     const todayTitle = document.createElement('h3');
     todayTitle.textContent = "Today";
     scheduleDiv1.append(todayIcon, todayTitle);
+    scheduleDiv1.classList.add('navLeftBtn');
 
     const scheduleDiv2 = document.createElement('div');
     scheduleDiv2.classList.add('nav-left-button')
@@ -28,6 +29,7 @@ export const NavLeft = (function () {
     const weekTitle = document.createElement('h3');
     weekTitle.textContent = "This Week";
     scheduleDiv2.append(weekIcon, weekTitle);
+    scheduleDiv2.classList.add('navLeftBtn');
 
     scheduleSection.append(scheduleDiv1, scheduleDiv2);
 

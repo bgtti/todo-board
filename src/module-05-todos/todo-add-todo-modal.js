@@ -37,7 +37,7 @@ let ToDoAddModal = (function () {
     let inputFieldName = document.createElement('input');
     inputFieldName.setAttribute('id', 'todoName');
     inputFieldName.setAttribute('type', 'text');
-    inputFieldName.setAttribute('maxlength', '15');
+    inputFieldName.setAttribute('maxlength', '20');
     inputFieldName.classList.add('modal-label-and-field-horizontal-input');
 
     toDoTitleContainer.append(labelForToDoName, inputFieldName);
@@ -47,7 +47,7 @@ let ToDoAddModal = (function () {
     requiredFieldWarning.textContent = "To-do title is a required field.";
     requiredFieldWarning.classList.add('required-field-warning');
     requiredFieldWarning.classList.add('todo-modal-add-todo-required-field-warning');
-    requiredFieldWarning.classList.add('hide'); //DONT FORGET TO UNHIDE
+    requiredFieldWarning.classList.add('hide');
 
     //board selection
     let boardSelectionContainer = document.createElement('div');
@@ -144,8 +144,9 @@ let ToDoAddModal = (function () {
     let toDoDescription = document.createElement('textarea');
     toDoDescription.setAttribute('id', 'toDoDescription');
     toDoDescription.setAttribute('name', 'To-do Description');
-    toDoDescription.setAttribute('maxlength', '100');
+    toDoDescription.setAttribute('maxlength', '150');
     toDoDescription.classList.add('modal-label-and-field-horizontal-input');
+    toDoDescription.classList.add('modal-label-and-field-description');
 
     toDoDescriptionContainer.append(labelForDescription, toDoDescription);
 
@@ -178,8 +179,9 @@ let ToDoAddModal = (function () {
     let toDoNotes = document.createElement('textarea');
     toDoNotes.setAttribute('id', 'toDoNotes');
     toDoNotes.setAttribute('name', 'To-do Notes');
-    toDoNotes.setAttribute('maxlength', '250');
+    toDoNotes.setAttribute('maxlength', '500');
     toDoNotes.classList.add('modal-label-and-field-vertical-children');
+    toDoNotes.classList.add('modal-label-and-field-notes');
 
     toDoNotesContainer.append(labelForNotes, toDoNotes);
 
@@ -222,44 +224,13 @@ let ToDoAddModal = (function () {
     let checklistUl = document.createElement('ul');
     checklistUl.classList.add('todo-modal-add-todo-ul-container');
 
-
-    // let EXAMPLE1 = document.createElement('li'); //ERASE
-    // EXAMPLE1.classList.add('todo-modal-add-todo-item')
-    // EXAMPLE1.classList.add('todo-modal-add-todo-checked-item')
-    // let EXAMPLE1DIV = document.createElement('div');
-    // let EXAMPLE1CHECK = document.createElement('ion-icon');//ERASE
-    // EXAMPLE1CHECK.classList.add('todo-modal-add-todo-check-icon')
-    // EXAMPLE1CHECK.setAttribute('name', 'checkmark'); //ERASE
-    // let EXAMPLE1LI = document.createElement('p');//ERASE
-    // EXAMPLE1LI.textContent = "this is something"
-    // let EXAMPLE1TRASH = document.createElement('ion-icon');//ERASE
-    // EXAMPLE1TRASH.setAttribute('name', 'trash'); //ERASE 
-    // EXAMPLE1TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    // EXAMPLE1DIV.append(EXAMPLE1CHECK, EXAMPLE1LI, EXAMPLE1TRASH); //ERASE 
-    // EXAMPLE1.append(EXAMPLE1DIV); //ERASE 
-
-    // let EXAMPLE2 = document.createElement('li'); //ERASE
-    // EXAMPLE2.classList.add('todo-modal-add-todo-item')
-    // let EXAMPLE2DIV = document.createElement('div');
-    // let EXAMPLE2CHECK = document.createElement('ion-icon');//ERASE
-    // EXAMPLE2CHECK.setAttribute('name', 'checkmark'); //ERASE
-    // EXAMPLE2CHECK.classList.add('todo-modal-add-todo-check-icon')
-    // let EXAMPLE2LI = document.createElement('p');//ERASE
-    // EXAMPLE2LI.textContent = "this is something"
-    // let EXAMPLE2TRASH = document.createElement('ion-icon');//ERASE
-    // EXAMPLE2TRASH.setAttribute('name', 'trash'); //ERASE 
-    // EXAMPLE2TRASH.classList.add('todo-modal-add-todo-trash-icon')
-    // EXAMPLE2DIV.append(EXAMPLE2CHECK, EXAMPLE2LI, EXAMPLE2TRASH); //ERASE 
-    // EXAMPLE2.append(EXAMPLE2DIV); //ERASE 
-
-    // checklistUl.append(EXAMPLE1, EXAMPLE2);
-
     toDoChecklistContainer.append(addToChecklistContainer, checklistUl);
 
     //save button
     let saveToDoButton = document.createElement('button');
     saveToDoButton.setAttribute('type', 'button')
     saveToDoButton.classList.add('modal-btn');
+    saveToDoButton.classList.add('btn-type-2');
     saveToDoButton.innerText = "Save to-do";
 
     //adding elements to subcontainer
@@ -272,6 +243,7 @@ let ToDoAddModal = (function () {
         addToDoModal,//used in index.js to open modal
 
         inputFieldName, // used in todo.js to create to-do
+        requiredFieldWarning, // used in todo.js to display warning
         dueDateSelection, // used in todo.js to create to-do
         toDoDescription, // used in todo.js to create to-do
         closeModalIcon, // used in index.js to close modal
@@ -280,8 +252,6 @@ let ToDoAddModal = (function () {
         checklistEnabledCheckBox, //used in index.js to open checklist
         toDoChecklistContainer,//used in index.js to open checklist / used in todo.js to reset modal
         priorityLevel0Container, //used in todo.js to reset modal
-        // priorityLevel1Container, //used in index.js to read priority value
-        // priorityLevel2Container, //used in index.js to read priority value
         priorityLevelIconsContainer,//used in index.js to read priority value / used in todo.js to read priority value
         addToChecklistBtn, //used in index.js to add checklist items
         saveToDoButton,//used in index.js to save todo / used in todo.js openingEditTodoModal

@@ -102,7 +102,7 @@
 /* add board btn */
 .nav-add-board-button ion-icon,
 .nav-add-board-button h3 {
-	color: var(--colorBlue);
+	color: var(--colorOrange);
 }
 
 .clr-storage-btn-mobile{

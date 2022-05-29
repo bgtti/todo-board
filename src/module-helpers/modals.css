@@ -49,12 +49,6 @@
 }
 .modal-btn {
 	margin-top: var(--mMargin);
-	padding: var(--buttonPadding);
-	background-color: var(--colorBlue);
-	border: var(--border);
-	border-radius: 5px;
-	font-weight: bold;
-	cursor: pointer;
 }
 .hide {
 	display: none;
@@ -78,6 +72,23 @@
 .modal-label-and-field-horizontal-input {
 	margin-right: var(--mMargin);
 	width: 200px;
+	border-bottom: 2px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+.modal-label-and-field-description{
+	height: 50px;
+}
+.modal-label-and-field-notes{
+	height: 100px;
+	border-bottom: 2px solid gray;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+}
+.todo-modal-add-todo-priority-icons-container{
+	border: none;
 }
 .modal-label-and-field-vertical {
 	display: flex;

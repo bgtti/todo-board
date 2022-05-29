@@ -162,11 +162,15 @@ const BoardFunctionsModal = (function () {
     };
     //Function that renames board
     const saveEditBoardModal = function () {
-        BoardManagement.changingBoardName(boardBeingEdited, BoardEditBoardModal.inputField.value);
-        BoardDisplay.displayBoardsInNav();
-        BoardDisplay.displayBoardPage(boardBeingEdited);
-        closeBoardModals(BoardEditBoardModal);
-        boardBeingEdited = undefined;
+        if (BoardEditBoardModal.inputField.value === "" || BoardEditBoardModal.inputField.value === " ") {
+            BoardEditBoardModal.requiredFieldWarning.classList.remove('hide')
+        } else {
+            BoardManagement.changingBoardName(boardBeingEdited, BoardEditBoardModal.inputField.value);
+            BoardDisplay.displayBoardsInNav();
+            BoardDisplay.displayBoardPage(boardBeingEdited);
+            closeBoardModals(BoardEditBoardModal);
+            boardBeingEdited = undefined;
+        }
     }
 
     //DELETE BOARD MODAL

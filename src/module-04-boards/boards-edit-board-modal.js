@@ -13,6 +13,7 @@ let BoardEditBoardModal = (function () {
     let inputField = document.createElement('input');
     let requiredFieldWarning = document.createElement('p');
     let saveBoardButton = document.createElement('button');
+    saveBoardButton.classList.add('btn-type-2');
     boardsModalMaker(modalHeading, closeModalIcon, labelForBoardName, inputField, requiredFieldWarning, saveBoardButton, addBoardModal);
 
     modalHeading.textContent = "Edit board";

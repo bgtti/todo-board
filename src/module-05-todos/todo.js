@@ -37,7 +37,7 @@ const TodoDisplay = (function () {
         toDoCardsDiv.classList.add('todo-cards-container');
 
         for (let todo of theTodosToDisplay) {
-            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["dueDate"], todo["description"], todo["priority"], toDoCardsDiv);
+            ToDoCard.createCard(todo["toDoId"], todo["title"], todo["dueDate"], todo["description"], todo["priority"], todo["note"], todo["checklist"], toDoCardsDiv);
         }
 
         return toDoCardsDiv
@@ -170,6 +170,7 @@ const TodoFunctionsModal = (function () {
     // resetting modal
     const addTodoModalReset = function () {
         ToDoAddModal.inputFieldName.value = "";
+        ToDoAddModal.requiredFieldWarning.classList.add('hide');
         ToDoAddModal.boardSelectTag.value = "";
         priorityLevelChosen = "0";
         resetPriorityClass();
@@ -202,18 +203,23 @@ const TodoFunctionsModal = (function () {
 
     //adding new todo
     const creatingNewToDoObject = function () {
-        let theBoardChosen = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
-        new ToDoList(
-            ToDoAddModal.inputFieldName.value,
-            theBoardChosen,
-            priorityLevelChosen,
-            ToDoAddModal.dueDateSelection.value,
-            ToDoAddModal.toDoDescription.value,
-            ToDoAddModal.toDoNotes.value,
-            checkListItemsArray
-        )
-        closeAddNewTodoModal();
-        return theBoardChosen
+        if (ToDoAddModal.inputFieldName.value === "" || ToDoAddModal.inputFieldName.value === " ") {
+            ToDoAddModal.requiredFieldWarning.classList.remove('hide')
+        } else {
+            let theBoardChosen = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
+            new ToDoList(
+                ToDoAddModal.inputFieldName.value,
+                theBoardChosen,
+                priorityLevelChosen,
+                ToDoAddModal.dueDateSelection.value,
+                ToDoAddModal.toDoDescription.value,
+                ToDoAddModal.toDoNotes.value,
+                checkListItemsArray
+            )
+            closeAddNewTodoModal();
+            return theBoardChosen
+        }
+
     }
     //Editing Todo
     const openingEditTodoModal = function (e) {
@@ -265,23 +271,23 @@ const TodoFunctionsModal = (function () {
         let theExistingTodo = allTodosArray.find(whichTodo)
         let theExistingTodoIndex = allTodosArray.findIndex(whichTodo)
 
-        console.log(allTodosArray); ////FUCKED UP
-        console.log(theExistingTodo);
-        console.log(theExistingTodoIndex);
+        if (ToDoAddModal.inputFieldName.value === "" || ToDoAddModal.inputFieldName.value === " ") {
+            ToDoAddModal.requiredFieldWarning.classList.remove('hide')
+        } else {
+            theExistingTodo.title = ToDoAddModal.inputFieldName.value;
+            theExistingTodo.boardId = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
 
-        theExistingTodo.title = ToDoAddModal.inputFieldName.value;
-        theExistingTodo.boardId = ToDoAddModal.boardSelectTag.options[ToDoAddModal.boardSelectTag.selectedIndex].dataset.bchoice;
+            theExistingTodo.priority = priorityLevelChosen;
+            theExistingTodo.dueDate = ToDoAddModal.dueDateSelection.value; //date needed here!!!!!
+            theExistingTodo.description = ToDoAddModal.toDoDescription.value;
+            theExistingTodo.note = ToDoAddModal.toDoNotes.value;
+            theExistingTodo.checklist = checkListItemsArray;
 
-        theExistingTodo.priority = priorityLevelChosen;
-        theExistingTodo.dueDate = ToDoAddModal.dueDateSelection.value; //date needed here!!!!!
-        theExistingTodo.description = ToDoAddModal.toDoDescription.value;
-        theExistingTodo.note = ToDoAddModal.toDoNotes.value;
-        theExistingTodo.checklist = checkListItemsArray;
-
-        allTodosArray[theExistingTodoIndex] = theExistingTodo;
-        closeAddNewTodoModal();
-        updateAllTodosArray();
-        return theExistingTodo.boardId
+            allTodosArray[theExistingTodoIndex] = theExistingTodo;
+            closeAddNewTodoModal();
+            updateAllTodosArray();
+            return theExistingTodo.boardId
+        }
     }
 
     return { //all returned items used in index.js to be used in E.L.

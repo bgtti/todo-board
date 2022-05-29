@@ -25,6 +25,7 @@ const modalMakerDelete = function (modalHeading, closeModalIcon, objectToDelete,
     //save button
     deleteButton.setAttribute('type', 'button');
     deleteButton.classList.add('modal-btn');
+    deleteButton.classList.add('btn-type-3');
 
     subContainerModal.append(modalTitleContainer, modalTextContainer, deleteButton);
 

@@ -30,7 +30,7 @@ let boardsModalMaker = function (modalHeading, closeModalIcon, labelForBoardName
     // inputField = document.createElement('input');
     inputField.setAttribute('id', 'boardName');
     inputField.setAttribute('type', 'text');
-    inputField.setAttribute('maxlength', '10');
+    inputField.setAttribute('maxlength', '20');
 
     modalFormContainer.append(labelForBoardName, inputField);
 

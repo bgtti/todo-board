@@ -5,6 +5,7 @@ To-do list app
 How the Todo Boards works:
 The user can create boards (that can represent different projects), and add todo cards to them.
 The todo cards can contain a title, description, priority level, due date, note, and check-list.
+When the todo card includes a note or check-list, an icon will appear to indicate it on the card (bottom-left).
 The user can see the todos of all todo cards under 'All boards'.
 The can see todos belonging to a particular board by clicking on that board's name.
 The can see todos due 'today' or within the next 7 days.
@@ -15,13 +16,7 @@ Content is saved to user's local storage. Storage content can be erased by press
 This app was built using Webpack as part of the Odin Project.
 Dates are formatted using date-fns library: https://date-fns.org/v2.28.0/docs/format
 
-Currently implemented:
-Board creation done. Currently only 'All boards' page displaying.
-Changing board view not possible due to event listener error that needs fixing.
-
-Event listener issue (in index.js under "//E.L. for nav board buttons: displaying the different boards")
-
-![Preview of eventlistener issue](/src/assets/eventlistenerIssue.png)
+![Preview of app](/src/assets/TodoAppPreview.png)
 
 The code is organized in the following way:
 index.js: displays the elements in the html file. Most elements are imported from other files (navbar, footer, modals, etc).
