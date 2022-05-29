@@ -1,5 +1,5 @@
 //In this file: Top Navbar HTML Elements
-import "../styles/nav.css";
+import "./nav.css";
 
 export const NavTop = (function () {
     const topNavbar = document.createElement('nav');
@@ -22,6 +22,11 @@ export const NavTop = (function () {
     topNavRight.classList.add('nav-top-right');
     topNavRight.append(mainIconContainer, pageTitle);
 
+    const clearLocalStorageBtn = document.createElement('div');
+    clearLocalStorageBtn.textContent = "Clear local storage";
+    clearLocalStorageBtn.classList.add("btn-type-1");
+    clearLocalStorageBtn.classList.add("clr-storage-btn-top");
+
     const topNavLeft = document.createElement('div');
     topNavLeft.classList.add('nav-top-left');
     const mobileBurger = document.createElement('ion-icon');
@@ -29,12 +34,12 @@ export const NavTop = (function () {
     mobileBurger.classList.add('nav-icon-burger');
     topNavLeft.append(mobileBurger);
 
-    topNavbar.append(topNavRight, topNavLeft);
+    topNavbar.append(topNavRight, topNavLeft, clearLocalStorageBtn);
 
     return {
         topNavbar, //used in index.js to display nav
         mobileBurger, //used in nav-mobile.js in function to control mobile naviation and index.js for the event trigger
-
+        clearLocalStorageBtn, //used in index.js to clear storage
     }
 })()
 

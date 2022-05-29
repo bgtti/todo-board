@@ -11,21 +11,6 @@
 	display: flex;
 	gap: var(--mMargin);
 }
-.board-content-option-buttons {
-	/* margin: var(--mMargin);
-	margin-top: var(--mMargin); */
-	padding: var(--buttonPadding);
-	background-color: var(--colorBlue);
-	border: var(--border);
-	border-radius: 5px;
-	font-weight: bold;
-	font-size: 13px;
-	cursor: pointer;
-}
-.board-content-option-buttons-edit, .board-content-option-buttons-delete{
-	background-color: var(--colorLightGrey);
-}
-
 
 /* TO DO CARD */
 .todo-cards-container{
@@ -34,10 +19,6 @@
 	grid-auto-rows: 215px;
 	gap: 15px;
 }
-/* .todo-cards-container > * {
-
-} */
-
 
 .to-do-card {
 	width: 200px;
@@ -68,4 +49,25 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	border-top: 1px solid var(--colorLightGrey);
+	padding-top: 5px;
+}
+.icons-cards-left, .icons-cards-right{
+flex-grow:1;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.icons-cards-right{
+	justify-content: right;
+	cursor: pointer;
+}
+.icons-cards-left{
+	justify-content: left;
+}
+.icons-cards-left > ion-icon{
+	color: grey;
+}
+.icons-cards-right>ion-icon {
+	cursor: pointer;
 }
