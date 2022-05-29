@@ -1,4 +1,5 @@
 # todo-list
+Live preview: https://bgtti.github.io/todo-list/
 
 ![Preview of app](/src/assets/TodoAppPreview.png)
 
