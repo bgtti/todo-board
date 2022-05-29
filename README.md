@@ -1,6 +1,6 @@
 # todo-list
 
-To-do list app
+![Preview of app](/src/assets/TodoAppPreview.png)
 
 How the Todo Boards works:
 The user can create boards (that can represent different projects), and add todo cards to them.
@@ -15,8 +15,6 @@ Content is saved to user's local storage. Storage content can be erased by press
 
 This app was built using Webpack as part of the Odin Project.
 Dates are formatted using date-fns library: https://date-fns.org/v2.28.0/docs/format
-
-![Preview of app](/src/assets/TodoAppPreview.png)
 
 The code is organized in the following way:
 index.js: displays the elements in the html file. Most elements are imported from other files (navbar, footer, modals, etc).
