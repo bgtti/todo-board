@@ -96,7 +96,6 @@ ToDoAddModal.saveToDoButton.addEventListener('click', (e) => {
     }
     BoardDisplay.displayBoardPage(boardToShow);
 }, false);
-
 //E.L for todo module: delete todo: open/close/delete
 PageContent.theBody.addEventListener('click', TodoDeletionFunctions.openDeleteTodoModal, false);
 TodoDeleteTodoModal.closeModalIcon.addEventListener('click', TodoDeletionFunctions.closeDeleteTodoModal, false);
