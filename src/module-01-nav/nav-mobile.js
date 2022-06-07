@@ -5,6 +5,15 @@ import { NavLeft } from "./nav-left.js";
 
 
 export const NavMobile = (function () {
+    const closeMobileMenu = function () {
+        NavLeft.leftNavBar.classList.remove('mobile-nav-active');
+        NavLeft.leftNavBar.classList.add('mobile-nav-transition');
+        NavTop.mobileBurger.classList.remove('nav-icon-burger-clicked');
+        setTimeout(() => {
+            NavLeft.leftNavBar.classList.add('mobile-nav-inactive');
+            NavLeft.leftNavBar.classList.remove('mobile-nav-transition');
+        }, 1000)
+    }
     const navMobileControl = function () {
         if (NavLeft.leftNavBar.classList.contains('mobile-nav-inactive') && NavLeft.leftNavBar.classList.contains('mobile-nav-active')) {
             NavLeft.leftNavBar.classList.remove('mobile-nav-active');
@@ -15,13 +24,7 @@ export const NavMobile = (function () {
             NavLeft.leftNavBar.classList.add('mobile-nav-active');
             NavTop.mobileBurger.classList.add('nav-icon-burger-clicked');
         } else {
-            NavLeft.leftNavBar.classList.remove('mobile-nav-active');
-            NavLeft.leftNavBar.classList.add('mobile-nav-transition');
-            NavTop.mobileBurger.classList.remove('nav-icon-burger-clicked');
-            setTimeout(() => {
-                NavLeft.leftNavBar.classList.add('mobile-nav-inactive');
-                NavLeft.leftNavBar.classList.remove('mobile-nav-transition');
-            }, 1000)
+            closeMobileMenu();
         }
     }
     const navMobileTrigger = function () {
@@ -36,9 +39,11 @@ export const NavMobile = (function () {
         }
     }
 
+
     return {
         navMobileTrigger, //used in index.js event listener to trigger mobile navigation
         navMobileControl, //used in index.js event listener to control mobile navigation
+        closeMobileMenu,//used in index.js event listener to control mobile navigation
     }
 })()
 

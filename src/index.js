@@ -50,16 +50,16 @@ NavTop.clearLocalStorageBtn.addEventListener('click', () => { window.localStorag
 window.addEventListener('load', NavMobile.navMobileTrigger);
 window.addEventListener('resize', NavMobile.navMobileTrigger);
 NavTop.mobileBurger.addEventListener('click', NavMobile.navMobileControl, false);
-NavLeft.clearLocalStorageBtn.addEventListener('click', () => { window.localStorage.clear(); location.reload() }, false);
+NavLeft.clearLocalStorageBtn.addEventListener('click', () => { if (window.innerWidth < 800) { NavMobile.closeMobileMenu() }; window.localStorage.clear(); location.reload() }, false);
 //E.L. for nav board buttons: displaying the different boards
-NavLeft.boardsSection.addEventListener('click', BoardDisplay.boardToDisplay);
+NavLeft.boardsSection.addEventListener('click', (e) => { if (window.innerWidth < 800) { NavMobile.closeMobileMenu() }; BoardDisplay.boardToDisplay(e) });
 //E.L. for nav schedule buttons: displaying the different schedules
-NavLeft.scheduleDiv1.addEventListener('click', ScheduleDisplay.displayToday);
-NavLeft.scheduleDiv2.addEventListener('click', ScheduleDisplay.displayWeek);
+NavLeft.scheduleDiv1.addEventListener('click', () => { if (window.innerWidth < 800) { NavMobile.closeMobileMenu() }; ScheduleDisplay.displayToday() }, false);
+NavLeft.scheduleDiv2.addEventListener('click', () => { if (window.innerWidth < 800) { NavMobile.closeMobileMenu() }; ScheduleDisplay.displayWeek() }, false);
 
 //BOARD
 //E.L. for board module: add new board modal: open/close/save
-NavLeft.addBoardDiv.addEventListener('click', () => { BoardFunctionsModal.openBoardModals(BoardAddBoardModal.addBoardModal) }, false);
+NavLeft.addBoardDiv.addEventListener('click', () => { if (window.innerWidth < 800) { NavMobile.closeMobileMenu() }; BoardFunctionsModal.openBoardModals(BoardAddBoardModal.addBoardModal) }, false);
 BoardAddBoardModal.closeModalIcon.addEventListener('click', () => { BoardFunctionsModal.closeBoardModals(BoardAddBoardModal) }, false)
 BoardAddBoardModal.saveBoardButton.addEventListener('click', BoardFunctionsModal.saveNewBoardModal, false);
 //E.L. for board module: edit board: open/close/save
