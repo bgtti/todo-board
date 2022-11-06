@@ -1,6 +1,6 @@
 # todo-list
 
-Live preview: https://bgtti.github.io/todo-list/
+Live preview: https://bgtti.github.io/todo-board/
 
 ![Preview of app](/src/assets/TodoAppPreview.png)
 
